@@ -1,2 +1,3 @@
 # Egor-Kuznetcov
-первый коммит сделан
+первый коммит сделан //first commit crushed
+second commit made
