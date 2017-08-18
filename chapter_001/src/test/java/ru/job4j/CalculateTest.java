@@ -7,19 +7,19 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
-* Test.
-*
-* @author - Egor K.
-* @since - 14.08.17
-* @version $Id$
-* @since 0.1
-*/
+ * Test.
+ *
+ * @author - Egor K.
+ * @since - 14.08.17
+ * @version $Id$
+ * @since 0.1
+ */
 
 public class CalculateTest {
 
-/**
-* Test add.
-*/
+	/**
+	 * Test add.
+	 */
 	@Test
 	public void whenAddOneToOneThenTwo() {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
