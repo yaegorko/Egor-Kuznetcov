@@ -52,6 +52,6 @@ public class Point {
      * @return пренадлежит или нет.
      */
     public boolean is(int a, int b) {
-        return getY() == a * getX() + b ? true : false;
+        return this.y == a * this.x + b ? true : false;
     }
 }
