@@ -31,7 +31,6 @@ public class MaxTest {
         int result = maxim.max(2, 1);
         assertThat(result, is(2));
     }
-
     /**
      * Равенство.
      */
@@ -40,5 +39,15 @@ public class MaxTest {
         Max maxim = new Max();
         int result = maxim.max(1, 1);
         assertThat(result, is(1));
+    }
+
+    /**
+     * Тест максимум из трех.
+     */
+    @Test
+    public void maxOfThree() {
+        Max max = new Max();
+        int result = max.max(1, 2, 3);
+        assertThat(result, is(3));
     }
 }
