@@ -22,7 +22,7 @@ public class Paint {
             }
             for (int j = 0; j < h - (i - 1); j++) { //цикл кирпичей ^;
                 if (j == 0) {
-                    stringBuilder.append("^"); // на вершине добавляем один кирпич ^;
+                    stringBuilder.append("^"); // на вершине или первым добавляем один кирпич ^;
                 } else {
                     stringBuilder.append("^^"); // на этажах добавляем два  кирпича ^;
                 }
