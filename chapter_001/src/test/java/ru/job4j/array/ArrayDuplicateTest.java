@@ -17,9 +17,18 @@ import static org.junit.Assert.assertThat;
         public void whenRemoveDuplicatesThenArrayWithoutDuplicate() {
             //напишите здесь тест, проверяющий удаление дубликатов строк из массива строк.
             ArrayDuplicate arrayDuplicate = new ArrayDuplicate();
-            String[] initial = {"Привет", "Мир", "Привет", "Супер", "Мир"};
+            String[] initial = {"Привет", "Мир", "Привет", "Привет", "Мир", "Мир", "Супер", "Мир"};
             String[] expected = {"Привет", "Мир", "Супер"};
-            assertThat(arrayDuplicate.remove(initial), is(expected));
+            String[] result = arrayDuplicate.remove(initial);
+            assertThat(result, is(expected));
         }
+    @Test
+    public void whenArrayAllDuplicateThenArrayWithoutDuplicate() {
+        //напишите здесь тест, проверяющий удаление дубликатов строк из массива строк.
+        ArrayDuplicate arrayDuplicate = new ArrayDuplicate();
+        String[] initial = {"1", "1", "1", "1", "1"};
+        String[] expected = {"1"};
+        assertThat(arrayDuplicate.remove(initial), is(expected));
+    }
     }
 
