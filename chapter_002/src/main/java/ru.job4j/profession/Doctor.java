@@ -47,7 +47,7 @@ public class Doctor extends Profession {
     /**
      * Метод проверяет может ли вылечить врач глаза у данного пациента.
      * @param person пациент.
-     * @param disease болезнь, в данной проверки болезнь глаз.
+     * @param disease болезнь, в данной проверке болезнь глаз.
      * @param colege ВУЗ
      * @param doctorSpecialization специализация.
      * @return строку может вылечить или нет.
