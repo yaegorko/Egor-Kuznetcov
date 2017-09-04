@@ -33,10 +33,10 @@ public class TrackerTest {
      */
     @Test
     public void whenAddNewItemsToTrackerThanReturnTheirNames() {
-        tracker.add(firstItem);
-        tracker.add(secondItem);
-        assertThat(tracker.findAll()[0].getName(), is("test1"));
-        assertThat(tracker.findAll()[1].getName(), is("test2"));
+//        tracker.add(firstItem);
+//        tracker.add(secondItem);
+        assertThat(tracker.add(firstItem).getName(), is("test1"));
+        assertThat(tracker.add(secondItem).getName(), is("test2"));
     }
 
     /**

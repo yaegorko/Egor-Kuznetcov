@@ -33,7 +33,7 @@ public class Tracker {
     public Item add(Item item) {
         item.setId(this.generateID());
         this.items[position++] = item;
-        return item;
+        return this.items[position - 1];
     }
 
     /**
