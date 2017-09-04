@@ -2,21 +2,53 @@ package ru.job4j.tracker;
 
 import java.util.Random;
 
+/**
+ * Класс трекер.
+ * @author - Egor K.
+ * @since - 04.09.17
+ */
+
 public class Tracker {
 
+    /**
+     * Массив заявок.
+     */
     private Item[] items = new Item[100];
+    /**
+     * Переменная отвечающая за индекс элемента массива.
+     */
     private int position = 0;
+    /**
+     * Для генерации Айди.
+     */
     private static final Random RN = new Random();
 
+    /**
+     * Добавляем новую заявку в Трекер.
+     * @param item новая заявка.
+     * @return итем (зачем?)
+     * спросить почему метод не войд??
+     *
+     */
     public Item add(Item item) {
         item.setId(this.generateID());
         this.items[position++] = item;
         return item;
     }
 
+    /**
+     * Генерим Айди.
+     * @return Айди.
+     * Время создания заявки + рандом.
+     */
     String generateID() {
         return String.valueOf(System.currentTimeMillis() + RN.nextInt());
     }
+
+    /**
+     * Апдейтим заявку.
+     * @param item новая заявка с АйДи той которую меняем.
+     */
 
     public void update(Item item) {
         for (int index = 0; index < position; index++) {
@@ -26,6 +58,12 @@ public class Tracker {
             }
         }
     }
+
+    /**
+     * Удаляем заявку.
+     * @param item который удаляем.
+     * Сдвигаем массив влево затирая элемент который нужно удалить, последний э-лт в исходном массиве заявок зануляем.
+     */
 
     public void delete(Item item) {
         Item[] newArray = new Item[this.position - 1];
@@ -40,6 +78,10 @@ public class Tracker {
         }
     }
 
+    /**
+     * Метод возвращает все не нулевые эл-ты массива заявок.
+     * @return массив ненулевых эл-тов массива заявок.
+     */
     public Item[] findAll() {
         Item[] resultArray = new Item[position];
         int resultArrayIndex = 0;
@@ -52,6 +94,11 @@ public class Tracker {
         return resultArray;
     }
 
+    /**
+     * МЕтод поиска в массиве заявок по имени.
+     * @param key имя итема.
+     * @return массив эл-тов с именем key.
+     */
     public Item[] findByName(String key) {
         Item[] resultArray = new Item[position];
         int resultArrayIndex = 0;
@@ -64,6 +111,11 @@ public class Tracker {
         return resultArray;
     }
 
+    /**
+     * МЕтод поиска в массиве заявок по ID.
+     * @param id ID
+     * @return элемент с уникальным ID.
+     */
     public Item findById(String id) {
         Item result = null;
         for (Item itemInArray : this.items) {
