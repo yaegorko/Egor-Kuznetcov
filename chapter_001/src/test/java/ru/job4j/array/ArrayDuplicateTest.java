@@ -22,6 +22,10 @@ import static org.junit.Assert.assertThat;
             String[] result = arrayDuplicate.remove(initial);
             assertThat(result, is(expected));
         }
+
+    /**
+     * Тест проверяющий удаление дубликатов строк из массива строк.
+     */
     @Test
     public void whenArrayAllDuplicateThenArrayWithoutDuplicate() {
         //напишите здесь тест, проверяющий удаление дубликатов строк из массива строк.
