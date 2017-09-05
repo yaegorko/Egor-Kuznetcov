@@ -12,6 +12,34 @@ import java.io.InputStreamReader;
 
 public class ConsoleInput {
     /**
+     * add.
+     */
+    private static final String ADD = "0";
+    /**
+     * showall.
+     */
+    private static final String SHOWALL = "1";
+    /**
+     * edit.
+     */
+    private static final String EDIT = "2";
+    /**
+     * delete.
+     */
+    private static final String DELETE = "3";
+    /**
+     * findbyid.
+     */
+    private static final String FINDID = "4";
+    /**
+     * findbyname.
+     */
+    private static final String FINDNAME = "5";
+    /**
+     * exit.
+     */
+    private static final String EXIT = "6";
+    /**
      * Создаем объект трекер.
      */
     private Tracker tracker = new Tracker();
@@ -19,17 +47,44 @@ public class ConsoleInput {
      * Потоки ввода с клавиатуры.
      */
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    /**
-     * Переменная для выбора пункта меню.
-     */
-    private String pointOfMenu = "";
 
+    /**
+     * Add new Item.
+     * @throws IOException exception
+     */
+
+    public void addNewItem() throws IOException {
+        System.out.println("Please, enter UserName: ");
+        String userName = reader.readLine();
+
+        System.out.println("Please, enter task's description: ");
+        String tasksDescription = reader.readLine();
+
+        System.out.println();
+        System.out.println("Task ID " + tracker.add(new Item(userName, tasksDescription)).getId() + " created");
+
+    }
+
+    /**
+     * Find Item by ID.
+     * @throws IOException exception.
+     */
+    public void findItemById() throws IOException {
+
+        System.out.println("For find task by ID, enter task's ID: ");
+        Item findItem = tracker.findById(reader.readLine());
+        if (findItem != null) {
+            System.out.println("Name: " + findItem.getName() + " | Description: " + findItem.getDescription());
+            System.out.println();
+        }
+    }
     /**
      * Метод меню трекера.
      * @throws IOException ексепшены ввода-вывода.
      */
-
     public void menuOfTracker() throws IOException {
+
+        System.out.println();
         System.out.println("0. Add new Item");
         System.out.println("1. Show all items");
         System.out.println("2. Edit item");
@@ -39,139 +94,82 @@ public class ConsoleInput {
         System.out.println("6. Exit Program");
         System.out.println("Select:");
 
-        pointOfMenu = reader.readLine();
+        /*
+            Переменная для выбора пункта меню.
+        */
+        String pointOfMenu = reader.readLine();
 
         System.out.println();
-        /**
-         * Добавляем новый таск.
-         */
-        if (pointOfMenu.equals("0")) {
 
-            System.out.println("Please, enter UserName: ");
-            String userName = reader.readLine();
-
-            System.out.println("Please, enter task's description: ");
-            String tasksDescription = reader.readLine();
-
-            System.out.println();
-            System.out.println("task ID " + tracker.add(new Item(userName, tasksDescription)).getId());
-
-            System.out.println();
-            menuOfTracker();
-
-        /**
-        * Показываем все таски в трекере.
+        /*
+             Добавляем новый таск.
         */
 
-        } else if (pointOfMenu.equals("1")) {
+        if (ADD.equals(pointOfMenu)) {
 
-            Item[] arrayOfAllItemInTracker = tracker.findAll();
-
-            if (arrayOfAllItemInTracker.length == 0) {
-                System.out.println("No task in tracker!");
-                System.out.println();
-                menuOfTracker();
-            }
-
-            for (Item item : arrayOfAllItemInTracker) {
-                if (item != null) {
-                    System.out.println("ID: " + item.getId() + "  | Name: " + item.getName() + "  | Description:  " + item.getDescription());
-                }
-            }
-
-            System.out.println();
+            addNewItem();
             menuOfTracker();
-        /**
-        *  Редактируем имеющийся в трекере таск.
+
+        /*
+            Показываем все таски в трекере.
         */
-        } else if (pointOfMenu.equals("2")) {
-            Item newItem = new Item();
 
-            System.out.println("For update task enter task's ID: ");
-            newItem.setId(reader.readLine());
-
-            System.out.println("Enter new Name: ");
-            newItem.setName(reader.readLine());
-
-            System.out.println("Enter new description: ");
-            newItem.setDescription(reader.readLine());
-
-            tracker.update(newItem);
-
-            System.out.println();
-            menuOfTracker();
-
-            /**
-             * Удаляем таск.
-             */
-
-        } else if (pointOfMenu.equals("3")) {
-
-            Item deletedItem = new Item();
-            System.out.println("For delete task enter task's ID: ");
-            deletedItem.setId(reader.readLine());
-
-            tracker.delete(deletedItem);
-
-            System.out.println("The task with ID " + deletedItem.getId() + " was deleted");
-
-            System.out.println();
-            menuOfTracker();
-
-            /**
-             * Ищем таск по айди.
-             */
-
-        } else if (pointOfMenu.equals("4")) {
-
-            System.out.println("For find task by ID, enter task's ID: ");
-            Item findItem = tracker.findById(reader.readLine());
-            if (findItem != null) {
-                System.out.println("Name: " + findItem.getName() + " | Description: " + findItem.getDescription());
-                System.out.println();
-            }
+        } else if (SHOWALL.equals(pointOfMenu)) {
 
             menuOfTracker();
 
-            /**
-             * Ищем таск по имени.
-             */
+        /*
+            Редактируем имеющийся в трекере таск.
+        */
 
-        } else if (pointOfMenu.equals("5")) {
+        } else if (EDIT.equals(pointOfMenu)) {
 
-            System.out.println("Enter the name: ");
-            Item[] findItems = tracker.findByName(reader.readLine());
-            System.out.println("Founded Items: ");
-            for (Item allFindItems : findItems) {
-                if (allFindItems != null) {
-                    System.out.println("ID: " + allFindItems.getId() + " | Name: " + allFindItems.getName() + " | Description: " + allFindItems.getDescription());
-                }
-            }
-
-            System.out.println();
             menuOfTracker();
 
-            /**
-             * Выход.
-             */
+        /*
+            Удаляем таск.
+        */
 
-        } else if (pointOfMenu.equals("6")) {
+        } else if (DELETE.equals(pointOfMenu)) {
 
-            reader.close();
+            menuOfTracker();
+
+        /*
+            Ищем таск по айди.
+        */
+
+        } else if (FINDID.equals(pointOfMenu)) {
+
+            findItemById();
+            menuOfTracker();
+
+        /*
+            Ищем таск по имени.
+        */
+
+        } else if (FINDNAME.equals(pointOfMenu)) {
+
+            menuOfTracker();
+
+        /*
+            Выход.
+        */
+
+        } else if (EXIT.equals(pointOfMenu)) {
+
             tracker = null;
 
-            /**
-             * Просим ввести числа от 0 до 6.
-             */
+        /*
+            Просим ввести числа от 0 до 6.
+        */
 
         } else {
 
             System.out.println("Enter the number (0-6)");
-
-            System.out.println();
             menuOfTracker();
         }
 
 
     }
+
 }

@@ -40,13 +40,13 @@ public class TrackerTest {
     /**
      * Тест метода update.
      */
-
     @Test
     public void whenUpdateItemWithSameIdThenReturnNewName() {
         tracker.add(firstItem);
+        assertThat(tracker.findAll()[0], is(firstItem));
         secondItem.setId(firstItem.getId());
         tracker.update(secondItem);
-        assertThat(tracker.findById(secondItem.getId()).getName(), is("test2"));
+        assertThat(tracker.findAll()[0], is(secondItem));
     }
 
     /**
@@ -67,15 +67,20 @@ public class TrackerTest {
     }
 
     /**
-     * тест метода getAll.
+     * тест метода findAll.
      */
     @Test
     public void whenGetAllNotNullItemThenReturnNewArrayLength() {
 
         tracker.add(firstItem);
-        tracker.add(secondItem);
         Item[] result = tracker.findAll();
+        assertThat(result.length, is(1));
+        tracker.add(secondItem);
+        result = tracker.findAll();
         assertThat(result.length, is(2));
+        tracker.add(thirdItem);
+        result = tracker.findAll();
+        assertThat(result.length, is(3));
     }
 
     /**
