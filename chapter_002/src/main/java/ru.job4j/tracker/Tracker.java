@@ -57,6 +57,7 @@ public class Tracker {
                 break;
             }
         }
+        // System.out.println("No one task with same ID!");
     }
 
     /**
@@ -71,8 +72,9 @@ public class Tracker {
             if (this.items[index - 1] != null && item.getId().equals(this.items[index - 1].getId())) {
                 System.arraycopy(this.items, 0, newArray, 0, index - 1);
                 System.arraycopy(this.items, index, newArray, index - 1, this.position - index);
-                System.arraycopy(newArray, 0, this.items, 0, newArray.length - 1);
                 this.items[this.position - 1] = null;
+                System.arraycopy(newArray, 0, this.items, 0, newArray.length);
+                this.position--;
                 break;
             }
         }
@@ -121,9 +123,12 @@ public class Tracker {
         for (Item itemInArray : this.items) {
             if (itemInArray != null && itemInArray.getId().equals(id)) {
                 result = itemInArray;
+            } else {
+                result = new Item();
+                result.setDescription("Can't find task in tracker!");
+                result.setName("ERROR: Wrong ID!");
             }
         }
-
         return result;
     }
 }

@@ -62,6 +62,23 @@ public class Item {
     }
 
     /**
+     * Сеттер дискрипшена.
+     * @param description дескрипшн
+     */
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * Геттр дискрипшена.
+     * @return дескрипшн
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * Конструктор по умолчанию.
      */
     public Item() {
@@ -78,6 +95,18 @@ public class Item {
         this.name = name;
         this.description = description;
         this.dateOfCreation = dateOfCreation;
+    }
+
+    /**
+     * Конструктор.
+     * @param name имя
+     * @param description описание
+     */
+
+    public Item(String name, String description) {
+        this.name = name;
+        this.description = description;
+
     }
 
 }

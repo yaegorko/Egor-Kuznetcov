@@ -33,8 +33,6 @@ public class TrackerTest {
      */
     @Test
     public void whenAddNewItemsToTrackerThanReturnTheirNames() {
-//        tracker.add(firstItem);
-//        tracker.add(secondItem);
         assertThat(tracker.add(firstItem).getName(), is("test1"));
         assertThat(tracker.add(secondItem).getName(), is("test2"));
     }
@@ -62,7 +60,9 @@ public class TrackerTest {
         tracker.add(thirdItem);
         tracker.add(thirdItem);
         tracker.delete(secondItem);
+        assertThat(tracker.findAll()[0], is(firstItem));
         assertThat(tracker.findAll()[1], is(thirdItem));
+        assertThat(tracker.findAll()[2], is(thirdItem));
 
     }
 
