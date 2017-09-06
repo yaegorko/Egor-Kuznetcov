@@ -84,8 +84,8 @@ public class Tracker {
                 if (this.items[index - 1] != null && item.getId().equals(this.items[index - 1].getId())) {
                     System.arraycopy(this.items, 0, newArray, 0, index - 1);
                     System.arraycopy(this.items, index, newArray, index - 1, this.position - index);
-                    this.items[this.position - 1] = null;
                     System.arraycopy(newArray, 0, this.items, 0, newArray.length);
+                    this.items[this.position - 1] = null;
                     this.position--;
                     System.out.println("The task with ID " + item.getId() + " was deleted");
                     return;
