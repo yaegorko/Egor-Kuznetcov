@@ -10,15 +10,23 @@ import java.io.InputStreamReader;
  * @since - 05.09.17
  */
 
-public class ConsoleInput {
+public class ConsoleInput implements Input{
+
+
+    private Tracker tracker;
+
+    public void setTracker(Tracker tracker) {
+        this.tracker = tracker;
+    }
+
     /**
      * add.
      */
     private static final String ADD = "0";
     /**
-     * showall.
+     * show all.
      */
-    private static final String SHOWALL = "1";
+    private static final String SHOW_ALL = "1";
     /**
      * edit.
      */
@@ -28,40 +36,49 @@ public class ConsoleInput {
      */
     private static final String DELETE = "3";
     /**
-     * findbyid.
+     * find by id.
      */
-    private static final String FINDID = "4";
+    private static final String FIND_BY_ID = "4";
     /**
-     * findbyname.
+     * find by name.
      */
-    private static final String FINDNAME = "5";
+    private static final String FIND_BY_NAME = "5";
     /**
      * exit.
      */
     private static final String EXIT = "6";
-    /**
-     * Создаем объект трекер.
-     */
-    private Tracker tracker = new Tracker();
+
     /**
      * Потоки ввода с клавиатуры.
      */
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     /**
+     *
+     *
+     */
+
+    public void start () {
+        try {
+            menuOfTracker();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Add new Item.
      * @throws IOException exception
      */
-
     public void addNewItem() throws IOException {
-        System.out.println("Please, enter UserName: ");
+        System.out.println("Please, enter TaskName: ");
         String userName = reader.readLine();
 
         System.out.println("Please, enter task's description: ");
         String tasksDescription = reader.readLine();
 
         System.out.println();
-        System.out.println("Task ID " + tracker.add(new Item(userName, tasksDescription)).getId() + " created");
+        System.out.println("Task ID " + this.tracker.add(new Item(userName, tasksDescription)).getId() + " created");
 
     }
 
@@ -69,10 +86,11 @@ public class ConsoleInput {
      * Find Item by ID.
      * @throws IOException exception.
      */
+
     public void findItemById() throws IOException {
 
         System.out.println("For find task by ID, enter task's ID: ");
-        Item findItem = tracker.findById(reader.readLine());
+        Item findItem = this.tracker.findById(reader.readLine());
         if (findItem != null) {
             System.out.println("Name: " + findItem.getName() + " | Description: " + findItem.getDescription());
             System.out.println();
@@ -114,7 +132,7 @@ public class ConsoleInput {
             Показываем все таски в трекере.
         */
 
-        } else if (SHOWALL.equals(pointOfMenu)) {
+        } else if (SHOW_ALL.equals(pointOfMenu)) {
 
             menuOfTracker();
 
@@ -138,7 +156,7 @@ public class ConsoleInput {
             Ищем таск по айди.
         */
 
-        } else if (FINDID.equals(pointOfMenu)) {
+        } else if (FIND_BY_ID.equals(pointOfMenu)) {
 
             findItemById();
             menuOfTracker();
@@ -147,7 +165,7 @@ public class ConsoleInput {
             Ищем таск по имени.
         */
 
-        } else if (FINDNAME.equals(pointOfMenu)) {
+        } else if (FIND_BY_NAME.equals(pointOfMenu)) {
 
             menuOfTracker();
 
@@ -157,7 +175,7 @@ public class ConsoleInput {
 
         } else if (EXIT.equals(pointOfMenu)) {
 
-            tracker = null;
+            this.tracker = null;
 
         /*
             Просим ввести числа от 0 до 6.
@@ -171,5 +189,4 @@ public class ConsoleInput {
 
 
     }
-
 }
