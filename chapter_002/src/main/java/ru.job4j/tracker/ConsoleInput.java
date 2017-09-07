@@ -10,15 +10,20 @@ import java.io.InputStreamReader;
  * @since - 05.09.17
  */
 
-public class ConsoleInput implements Input{
+public class ConsoleInput implements Input {
 
-
+    /**
+     * Поле для трекера.
+     */
     private Tracker tracker;
 
+    /**
+     * сеттр трекера.
+     * @param tracker Трекер
+     */
     public void setTracker(Tracker tracker) {
         this.tracker = tracker;
     }
-
     /**
      * add.
      */
@@ -54,31 +59,18 @@ public class ConsoleInput implements Input{
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     /**
-     *
-     *
-     */
-
-    public void start () {
-        try {
-            menuOfTracker();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Add new Item.
      * @throws IOException exception
      */
     public void addNewItem() throws IOException {
         System.out.println("Please, enter TaskName: ");
-        String userName = reader.readLine();
+        String taskName = reader.readLine();
 
         System.out.println("Please, enter task's description: ");
         String tasksDescription = reader.readLine();
 
         System.out.println();
-        System.out.println("Task ID " + this.tracker.add(new Item(userName, tasksDescription)).getId() + " created");
+        System.out.println("Task with ID " + this.tracker.add(new Item(taskName, tasksDescription)).getId() + " created");
 
     }
 
@@ -86,7 +78,6 @@ public class ConsoleInput implements Input{
      * Find Item by ID.
      * @throws IOException exception.
      */
-
     public void findItemById() throws IOException {
 
         System.out.println("For find task by ID, enter task's ID: ");
@@ -96,6 +87,7 @@ public class ConsoleInput implements Input{
             System.out.println();
         }
     }
+
     /**
      * Метод меню трекера.
      * @throws IOException ексепшены ввода-вывода.
@@ -116,7 +108,6 @@ public class ConsoleInput implements Input{
             Переменная для выбора пункта меню.
         */
         String pointOfMenu = reader.readLine();
-
         System.out.println();
 
         /*
@@ -175,7 +166,7 @@ public class ConsoleInput implements Input{
 
         } else if (EXIT.equals(pointOfMenu)) {
 
-            this.tracker = null;
+            return;
 
         /*
             Просим ввести числа от 0 до 6.
@@ -186,7 +177,5 @@ public class ConsoleInput implements Input{
             System.out.println("Enter the number (0-6)");
             menuOfTracker();
         }
-
-
     }
 }

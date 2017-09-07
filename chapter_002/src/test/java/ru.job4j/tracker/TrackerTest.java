@@ -63,7 +63,6 @@ public class TrackerTest {
         assertThat(tracker.findAll()[0], is(firstItem));
         assertThat(tracker.findAll()[1], is(thirdItem));
         assertThat(tracker.findAll()[2], is(thirdItem));
-
     }
 
     /**
@@ -99,7 +98,5 @@ public class TrackerTest {
         for (int i = 0; i < result.length - firstItemCounter * 2; i++) {
             assertThat(result[i].getName(), is("test1"));
         }
-
-
     }
 }

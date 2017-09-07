@@ -8,16 +8,18 @@ import java.io.IOException;
 public class StartUi {
 
     private Input input;
+
     private Tracker tracker;
 
-    public StartUi() {
+    public Tracker getTracker() {
+        return tracker;
     }
 
-    public StartUi(Input input) {
-        this.input = input;
+    public void setTracker(Tracker tracker) {
+        this.tracker = tracker;
     }
 
-    public StartUi(Input input, Tracker tracker){
+    public StartUi(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
@@ -29,8 +31,7 @@ public class StartUi {
      */
     public static void main(String[] args) throws IOException {
 
-
-        new StartUi().init();
+        new StartUi(new ConsoleInput(), new Tracker()).init();
 
     }
 
@@ -40,10 +41,7 @@ public class StartUi {
      */
     public void init() throws IOException {
 
-        Tracker tracker = new Tracker();
-        Input input = new ConsoleInput();
-        input.setTracker(tracker);
-        input.start();
-
+        input.setTracker(this.tracker);
+        input.menuOfTracker();
     }
 }

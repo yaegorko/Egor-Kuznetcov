@@ -1,8 +1,22 @@
 package ru.job4j.tracker;
 
-public interface Input {
+import java.io.IOException;
 
-   void start();
+/**
+ * Интефейс классов StubInput и ConsoleInput.
+ */
+
+public interface Input {
+   /**
+    * Метод для меню.
+    * @throws IOException эксепшн ввода вывода.
+    */
+   void menuOfTracker() throws IOException;
+
+   /**
+    * Передаем трекер.
+    * @param tracker трекер
+    */
    void setTracker(Tracker tracker);
 
 }
