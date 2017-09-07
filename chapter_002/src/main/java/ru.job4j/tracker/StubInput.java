@@ -10,14 +10,28 @@ import java.io.IOException;
 
 public class StubInput implements Input {
 
+    /**
+     * Массив для имитации последовательности действий пользователя.
+     */
     private String[] strings;
 
+    /**
+     * Поле для трекера, получаем из СтартУи.
+     */
     private Tracker tracker;
 
+    /**
+     * Сеттр трекера.
+     * @param tracker трекер
+     */
     public void setTracker(Tracker tracker) {
         this.tracker = tracker;
     }
 
+    /**
+     * Конструктор с массивом стрингов для последовательности действий.
+     * @param strings массивом стрингов для имитации последовательности действий.
+     */
     public StubInput(String[] strings) {
         this.strings = strings;
     }
@@ -51,10 +65,21 @@ public class StubInput implements Input {
      */
     private static final String EXIT = "6";
 
+    /**
+     * Маркер для ввода в консоль EXIT = "6", меняется на false после ввода переменной для.
+     * инициализации первого действия.
+     */
     private boolean marker = true;
 
+    /**
+     * Переменная для инициализации действий с меню.
+     */
     private String pointOfMenu;
 
+    /**
+     * Метод для добавления Таска в трекер.
+     * @throws IOException экзепшн.
+     */
     public void addNewItem() throws IOException {
         System.out.println("Please, enter TaskName: ");
         String taskName = this.strings[1];
@@ -66,9 +91,12 @@ public class StubInput implements Input {
 
         System.out.println();
         System.out.println("Task with ID " + this.tracker.add(new Item(taskName, tasksDescription)).getId() + " created");
-
     }
 
+    /**
+     * Метод для получения всех добавленных Тасков в трекере.
+     * @throws IOException экзепшн
+     */
     public void findAll() throws IOException {
 
         Item[] arrayOfAllItemInTracker = tracker.findAll();
@@ -85,6 +113,9 @@ public class StubInput implements Input {
         }
     }
 
+    /**
+     * Метод для замены имеющегося таска новым, нужно знать ИД старого таска.
+     */
     public void updateTask() {
         Item newItem = new Item();
 
@@ -103,6 +134,10 @@ public class StubInput implements Input {
         this.tracker.update(newItem);
     }
 
+    /**
+     * Метод для удаления таска из трекера.
+     * @throws IOException екзепшн
+     */
     public void deleteItem() throws IOException {
         Item deletedItem = new Item();
         System.out.println("For delete task enter task's ID: ");
@@ -112,7 +147,7 @@ public class StubInput implements Input {
     }
 
     /**
-     * Find Item by ID.
+     * Ищем таски по ИД. ИД уникальные.
      * @throws IOException exception.
      */
     public void findItemById() throws IOException {
@@ -126,6 +161,9 @@ public class StubInput implements Input {
         }
     }
 
+    /**
+     * Ищем таски по имени. Имена могут быть одинаковые.
+     */
     public void findByName() {
         System.out.println("Enter the name: ");
         Item[] findItems = tracker.findByName(strings[1]);
@@ -138,6 +176,10 @@ public class StubInput implements Input {
         }
     }
 
+    /**
+     * Метод управляющий меню действий с трекером.
+     * @throws IOException экзепшн.
+     */
     public void menuOfTracker() throws IOException {
 
         System.out.println();
@@ -166,7 +208,6 @@ public class StubInput implements Input {
         /*
              Добавляем новый таск.
         */
-
         if (ADD.equals(pointOfMenu)) {
 
             addNewItem();
@@ -175,7 +216,6 @@ public class StubInput implements Input {
         /*
             Показываем все таски в трекере.
         */
-
         } else if (SHOW_ALL.equals(pointOfMenu)) {
 
             findAll();
@@ -184,7 +224,6 @@ public class StubInput implements Input {
         /*
             Редактируем имеющийся в трекере таск.
         */
-
         } else if (EDIT.equals(pointOfMenu)) {
 
             updateTask();
@@ -193,7 +232,6 @@ public class StubInput implements Input {
         /*
             Удаляем таск.
         */
-
         } else if (DELETE.equals(pointOfMenu)) {
 
             deleteItem();
@@ -202,7 +240,6 @@ public class StubInput implements Input {
         /*
             Ищем таск по айди.
         */
-
         } else if (FIND_BY_ID_TEST.equals(pointOfMenu)) {
 
             findItemById();
@@ -211,7 +248,6 @@ public class StubInput implements Input {
         /*
             Ищем таск по имени.
         */
-
         } else if (FIND_BY_NAME.equals(pointOfMenu)) {
 
             findByName();
@@ -220,7 +256,6 @@ public class StubInput implements Input {
         /*
             Выход.
         */
-
         } else if (EXIT.equals(pointOfMenu)) {
 
             return;
@@ -228,7 +263,6 @@ public class StubInput implements Input {
         /*
             Просим ввести числа от 0 до 6.
         */
-
         } else {
             System.out.println("Enter the number (0-6)");
             menuOfTracker();

@@ -71,7 +71,6 @@ public class ConsoleInput implements Input {
 
         System.out.println();
         System.out.println("Task with ID " + this.tracker.add(new Item(taskName, tasksDescription)).getId() + " created");
-
     }
 
     /**
