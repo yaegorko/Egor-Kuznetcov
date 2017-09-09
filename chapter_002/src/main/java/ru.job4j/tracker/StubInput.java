@@ -36,6 +36,7 @@ public class StubInput implements Input {
      */
     public String ask(String question) throws IOException {
         System.out.println(question);
+        System.out.println(strings[count]);
         return strings[count++];
     }
 }
