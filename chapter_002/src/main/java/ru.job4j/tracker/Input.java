@@ -7,16 +7,12 @@ import java.io.IOException;
  */
 
 public interface Input {
-   /**
-    * Метод для меню.
-    * @throws IOException эксепшн ввода вывода.
-    */
-   void menuOfTracker() throws IOException;
 
    /**
-    * Передаем трекер.
-    * @param tracker трекер
+    * Прототип аска.
+    * @param question вопрос.
+    * @return ответ.
+    * @throws IOException екзепшн.
     */
-   void setTracker(Tracker tracker);
-
+   String ask(String question) throws IOException;
 }
