@@ -36,15 +36,16 @@ public class MenuTracker {
      */
     public int fillActions() {
 
-        this.actions[0] = new AddItem();
-        this.actions[1] = new ShowAll();
-        this.actions[2] = new UpdateTask();
-        this.actions[3] = new DeleteTask();
-        this.actions[4] = new FindByID();
-        this.actions[5] = new FindByName();
-        this.actions[6] = new ExitProgram();
+        int count = 0;
+        this.actions[count] = new AddItem("Add task", count++);
+        this.actions[count] = new ShowAll("Show all tasks", count++);
+        this.actions[count] = new UpdateTask("Edit task", count++);
+        this.actions[count] = new DeleteTask("Delete task", count++);
+        this.actions[count] = new FindByID("Find task by ID", count++);
+        this.actions[count] = new FindByName("Find task by name", count++);
+        this.actions[count] = new ExitProgram("Exit", count++);
 
-        return actions.length;
+        return count;
     }
 
     /**
@@ -72,13 +73,15 @@ public class MenuTracker {
     /**
      * Класс для пункта Добавить Таск.
      */
-    private class AddItem implements UserAction {
+    private class AddItem extends BaseAction {
+
         /**
-         * Позиция в меню и в массиве меню.
-         * @return кей.
+         * Конструктор.
+         * @param name имя.
+         * @param key позиция.
          */
-        public int key() {
-            return 0;
+        AddItem(String name, int key) {
+            super(name, key);
         }
 
         /**
@@ -96,28 +99,22 @@ public class MenuTracker {
             System.out.println("Task with ID " + tracker.add(new Item(taskName, tasksDescription)).getId() + " created");
 
         }
-
-        /**
-         * Метод вывода информации о классе.
-         * @return имя в меню
-         */
-        public String info() {
-
-            return String.format("%s. %s", this.key(), "Add new item.");
-        }
     }
 
     /**
      * Класс для пункта Показать все таски.
      */
-    private static class ShowAll implements UserAction {
+    private static class ShowAll extends BaseAction {
+
         /**
-         * Позиция в меню и в массиве меню.
-         * @return кей.
+         * Конструктор.
+         * @param name имя.
+         * @param key позиция.
          */
-        public int key() {
-            return 1;
+        ShowAll(String name, int key) {
+            super(name, key);
         }
+
         /**
          * Метод для получения всех добавленных Тасков в трекере.
          * @param input инпут
@@ -138,28 +135,21 @@ public class MenuTracker {
                 }
             }
         }
-
-        /**
-         * Метод вывода информации о классе.
-         * @return имя в меню
-         */
-        public String info() {
-
-            return String.format("%s. %s", this.key(), "Show all items.");
-        }
     }
 }
 
 /**
  * Класс для пункта Edit item.
  */
-class UpdateTask implements UserAction {
+class UpdateTask extends BaseAction {
+
     /**
-     * Позиция в меню и в массиве меню.
-     * @return кей.
+     * Конструктор.
+     * @param name имя.
+     * @param key позиция.
      */
-    public int key() {
-        return 2;
+    UpdateTask(String name, int key) {
+        super(name, key);
     }
 
     /**
@@ -176,27 +166,20 @@ class UpdateTask implements UserAction {
         newItem.setDescription(input.ask("Enter new description: "));
         tracker.update(newItem);
     }
-
-    /**
-     * Метод вывода информации о классе.
-     * @return имя в меню
-     */
-    public String info() {
-
-        return String.format("%s. %s", this.key(), "Edit item.");
-    }
 }
 
 /**
  * Класс для пункта Delete item.
  */
-class DeleteTask implements UserAction {
+class DeleteTask extends BaseAction {
+
     /**
-     * Позиция в меню и в массиве меню.
-     * @return кей.
+     * Конструктор.
+     * @param name имя.
+     * @param key позиция.
      */
-    public int key() {
-        return 3;
+    DeleteTask(String name, int key) {
+        super(name, key);
     }
 
     /**
@@ -210,26 +193,20 @@ class DeleteTask implements UserAction {
         deletedItem.setId(input.ask("For delete task enter task's ID: "));
         tracker.delete(deletedItem);
     }
-
-    /**
-     * Метод вывода информации о классе.
-     * @return имя в меню
-     */
-    public String info() {
-        return String.format("%s. %s", this.key(), "Delete item.");
-    }
 }
 
 /**
  * Класс для пункта Find item by Id.
  */
-class FindByID implements UserAction {
+class FindByID extends BaseAction {
+
     /**
-     * Позиция в меню и в массиве меню.
-     * @return кей.
+     * Конструктор.
+     * @param name имя.
+     * @param key позиция.
      */
-    public int key() {
-        return 4;
+    FindByID(String name, int key) {
+        super(name, key);
     }
 
     /**
@@ -247,27 +224,20 @@ class FindByID implements UserAction {
         }
 
     }
-
-    /**
-     * Метод вывода информации о классе.
-     * @return имя в меню
-     */
-    public String info() {
-
-        return String.format("%s. %s", this.key(), "Find item by Id.");
-    }
 }
 
 /**
  * Класс для пункта Find item by Name.
  */
-class FindByName implements UserAction {
+class FindByName extends BaseAction {
+
     /**
-     * Позиция в меню и в массиве меню.
-     * @return кей.
+     * Конструктор.
+     * @param name имя.
+     * @param key позиция.
      */
-    public int key() {
-        return 5;
+    FindByName(String name, int key) {
+        super(name, key);
     }
 
     /**
@@ -287,27 +257,20 @@ class FindByName implements UserAction {
             }
         }
     }
-
-    /**
-     * Метод вывода информации о классе.
-     * @return имя в меню
-     */
-    public String info() {
-
-        return String.format("%s. %s", this.key(), "Find item by Name.");
-    }
 }
 
 /**
  * Класс для выхода.
  */
-class ExitProgram implements UserAction {
+class ExitProgram extends BaseAction {
+
     /**
-     * Позиция в меню и в массиве меню.
-     * @return кей.
+     * Конструктор.
+     * @param name имя.
+     * @param key позиция.
      */
-    public int key() {
-        return 6;
+    ExitProgram(String name, int key) {
+        super(name, key);
     }
 
     /**
@@ -319,14 +282,7 @@ class ExitProgram implements UserAction {
     public void execute(Input input, Tracker tracker) throws IOException {
         System.out.println("Press 'y' to exit!");
     }
-
-    /**
-     * Метод вывода информации о классе.
-     * @return имя в меню
-     */
-    public String info() {
-        return String.format("%s. %s", this.key(), "Exit.");
-    }
 }
+
 
 
