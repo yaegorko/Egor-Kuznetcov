@@ -42,7 +42,7 @@ public class StartUi {
      */
     public static void main(String[] args) throws IOException {
 
-        new StartUi(new ConsoleInput(), new Tracker()).init();
+        new StartUi(new ValidateInput(), new Tracker()).init();
 
     }
 
@@ -51,20 +51,17 @@ public class StartUi {
      * @throws IOException инит.
      */
     public void init() throws IOException {
-        int key = 6;
+
         MenuTracker menuTracker = new MenuTracker(this.input, this.tracker);
-        menuTracker.fillActions();
+        int[] ranges = new int[menuTracker.fillActions()];
+        int count = 0;
+
+        for (int elements : ranges) {
+            ranges[count] = count++;
+        }
         do {
             menuTracker.show();
-            try {
-                key = Integer.valueOf(input.ask("Select (0-6):"));
-            } catch (NumberFormatException x) {
-                System.out.println("Enter number 0-6!");
-            }
-
-            if (key >= 0 && key < 7) {
-                menuTracker.select(key);
-            }
+            menuTracker.select(input.ask("Select", ranges));
         } while (!"y".equals(this.input.ask("Exit program? (y/n)")));
     }
 }

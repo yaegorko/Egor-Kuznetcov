@@ -15,4 +15,14 @@ public interface Input {
     * @throws IOException екзепшн.
     */
    String ask(String question) throws IOException;
+
+    /**
+     * Прототип перегруженного метода Аск для валидации ввода в консоль.
+     * @param question вопрос
+     * @param range дипазон допустимых значений ввода.
+     * @return допустимое значение key (элемента меню действий) или исключение "Вне диапазона."
+     * @throws IOException тянется от буфер ридера.
+     */
+   int ask(String question, int[] range) throws IOException;
 }
+

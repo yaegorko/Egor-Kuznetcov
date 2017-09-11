@@ -32,8 +32,9 @@ public class MenuTracker {
 
     /**
      * Добавляем новые объекты действий в массив действий меню.
+     * @return возвращает длину массива действий. для массива диапазона прнимаемых значений в Input.
      */
-    public void fillActions() {
+    public int fillActions() {
 
         this.actions[0] = new AddItem();
         this.actions[1] = new ShowAll();
@@ -42,6 +43,8 @@ public class MenuTracker {
         this.actions[4] = new FindByID();
         this.actions[5] = new FindByName();
         this.actions[6] = new ExitProgram();
+
+        return actions.length;
     }
 
     /**
