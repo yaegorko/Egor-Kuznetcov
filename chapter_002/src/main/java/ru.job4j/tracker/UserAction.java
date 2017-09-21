@@ -3,12 +3,12 @@ package ru.job4j.tracker;
 import java.io.IOException;
 
 /**
- * Прототип классов управления меню трекера.
+ * Прототип класса BaseActionпше управления меню трекера.
  */
 public interface UserAction {
     /**
      * Позиция в меню и в массиве меню.
-     * @return кей.
+     * @return кей - позицию.
      */
     int key();
 
