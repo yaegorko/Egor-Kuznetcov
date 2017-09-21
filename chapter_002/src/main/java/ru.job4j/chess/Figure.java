@@ -8,9 +8,7 @@ public abstract class Figure {
         this.position = position;
     }
 
-    public Cell[] way(Cell dist) throws ImpossibleMoveException {
-        return new Cell[7];
-    }
+    public abstract Cell[] way(Cell dist) throws ImpossibleMoveException;
 }
 
 
