@@ -3,7 +3,7 @@ package ru.job4j.tracker;
 import java.io.IOException;
 
 /**
- * Класс прототип классов действий меню.\
+ * Класс прототип классов действий меню.
  * @author - Egor K.
  * @since - 11.09.17
  */

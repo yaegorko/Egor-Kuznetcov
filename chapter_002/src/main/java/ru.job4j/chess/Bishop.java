@@ -2,10 +2,26 @@ package ru.job4j.chess;
 
 import static java.lang.Math.abs;
 
+/**
+ * Класс для слона.
+ */
 public class Bishop extends Figure {
 
+    /**
+     * Слоновий конструктор.
+     * @param position позиция на доске.
+     */
     public Bishop(Cell position) {
         super(position);
+    }
+
+    /**
+     * Метод для перезаписи состояния слона в ячейке массива Figures.
+     * @param dist новая позиция на доске.
+     * @return новый объект слона для массива.
+     */
+    public Figure clone(Cell dist) {
+        return new Bishop(dist);
     }
 
     @Override

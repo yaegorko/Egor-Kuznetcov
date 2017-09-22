@@ -4,9 +4,14 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Класс тестов фигуры Слон.
+ */
 public class BishopTest {
 
-    //по белой диагонали идем вправо вверх.
+    /**
+     * По белой диагонали идем вправо вверх.
+     */
     @Test
     public void whenHaveWhiteStartPointAndCorrectFinishPointThanGetTrueWayToRightTop() {
         Figure whiteDiagonalBishop = new Bishop(new Cell(2, 1));
@@ -22,7 +27,9 @@ public class BishopTest {
         assertThat(trueWay[3].getPositionY(), is(5));
     }
 
-    //по белой диагонали идем влево вниз.
+    /**
+     * по белой диагонали идем влево вниз.
+     */
     @Test
     public void whenHaveWhiteStartPointAndCorrectFinishPointThanGetTrueWayToLeftBot() {
         Figure whiteDiagonalBishop = new Bishop(new Cell(8, 7));
@@ -40,8 +47,11 @@ public class BishopTest {
         assertThat(trueWay[5].getPositionY(), is(1));
     }
 
-    @Test // тест русских имен методов фор фан.
-    public void слонИдетПоБелойДиагоналиВправоВниз() {
+    /**
+     * по белой диагонали идем вправо вниз.
+     */
+    @Test
+    public void whenBishopMoveToWhiteDiagonalRightBot() {
         Figure whiteDiagonalBishop = new Bishop(new Cell(2, 7));
         Cell finishPoint = new Cell(7, 2);
         Cell[] trueWay = whiteDiagonalBishop.way(finishPoint);
@@ -51,9 +61,11 @@ public class BishopTest {
         }
     }
 
-    // слон по черной диагонали вправо вниз.
+    /**
+     * слон по черной диагонали вправо вниз.
+     */
     @Test
-    public void слонИдетПоЧернойДиагоналиВправоВниз() {
+    public void whenBishopMoveToBlackDiagonalRightBot() {
         Figure blackDiagonalBishop = new Bishop(new Cell(1, 7));
         Cell finishPoint = new Cell(7, 1);
         Cell[] trueWay = blackDiagonalBishop.way(finishPoint);
@@ -63,7 +75,10 @@ public class BishopTest {
             assertThat(trueWay[i].getPositionY(), is(7 - 1 - i));
         }
     }
-    // Слон по белой диагонали влево вверх.
+
+    /**
+     * Слон по белой диагонали влево вверх.
+     */
     @Test
     public void whenHaveWhiteStartPointAndCorrectFinishPointThanGetTrueWayToLeftTop() {
         Figure whiteDiagonalBishop = new Bishop(new Cell(6, 3));
