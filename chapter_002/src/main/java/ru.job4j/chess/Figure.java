@@ -4,11 +4,20 @@ package ru.job4j.chess;
  * Абстрактный класс для шахматных фигур.
  */
 public abstract class Figure {
+
     /**
      * Клетка под фигурой.
-     * MVN ругается на приватность. Как исправить?
+     * MVN ругается на приватность. Как исправить? Исправили геттером :)
      */
-    final Cell position;
+    private final Cell position;
+
+    /**
+     * Геттр позиции - клетки.
+     * @return Cell position.
+     */
+    public Cell getPosition() {
+        return position;
+    }
 
     /**
      * Конструктор.

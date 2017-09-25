@@ -31,11 +31,11 @@ public class Board {
     boolean move(Cell source, Cell dist) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException, CloneNotSupportedException {
 
         for (int i = 0; i < figures.length; i++) {
-            if (source.equals(this.figures[i].position)) {
+            if (source.equals(this.figures[i].getPosition())) {
                 Cell[] way = figures[i].way(dist);
                     for (int n = 0; n < way.length; n++) {
                         for (int j = 0; j < figures.length; j++) {
-                            if (way[n].equals(figures[j].position)) {
+                            if (way[n].equals(figures[j].getPosition())) {
                                 throw new OccupiedWayException("Путь занят");
                             }
                         }

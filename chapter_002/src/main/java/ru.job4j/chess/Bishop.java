@@ -30,33 +30,33 @@ public class Bishop extends Figure {
         Cell[] trueWay;
 
             //проверяем нахождение координат цели пути на одной диагонали сщ стартовой точкой.
-            if (abs(dist.getPositionX() - position.getPositionX()) ==  abs(dist.getPositionY() - position.getPositionY())) {
+            if (abs(dist.getPositionX() - getPosition().getPositionX()) ==  abs(dist.getPositionY() - getPosition().getPositionY())) {
 
-                trueWay = new Cell[abs(position.getPositionX() - dist.getPositionX())];
+                trueWay = new Cell[abs(getPosition().getPositionX() - dist.getPositionX())];
 
                 //слон идет вправо вверх.
-                if (dist.getPositionX() - position.getPositionX() > 0 && dist.getPositionY() - position.getPositionY() > 0) {
+                if (dist.getPositionX() - getPosition().getPositionX() > 0 && dist.getPositionY() - getPosition().getPositionY() > 0) {
 
                     for (int i = 0; i < trueWay.length; i++) {
-                        trueWay[i] = new Cell(position.getPositionX() + i + 1, position.getPositionY() + i + 1);
+                        trueWay[i] = new Cell(getPosition().getPositionX() + i + 1, getPosition().getPositionY() + i + 1);
                     }
                 //слон идет вправо вниз.
-                } else if (dist.getPositionX() - position.getPositionX() > 0 && dist.getPositionY() - position.getPositionY() < 0) {
+                } else if (dist.getPositionX() - getPosition().getPositionX() > 0 && dist.getPositionY() - getPosition().getPositionY() < 0) {
 
                     for (int i = 0; i < trueWay.length; i++) {
-                        trueWay[i] = new Cell(position.getPositionX() + i + 1, position.getPositionY() - i - 1);
+                        trueWay[i] = new Cell(getPosition().getPositionX() + i + 1, getPosition().getPositionY() - i - 1);
                     }
                 //слон идет влево вверх
-                } else if ((dist.getPositionX() - position.getPositionX() < 0 && dist.getPositionY() - position.getPositionY() > 0)) {
+                } else if ((dist.getPositionX() - getPosition().getPositionX() < 0 && dist.getPositionY() - getPosition().getPositionY() > 0)) {
 
                     for (int i = 0; i < trueWay.length; i++) {
-                        trueWay[i] = new Cell(position.getPositionX() - i - 1, position.getPositionY() + i + 1);
+                        trueWay[i] = new Cell(getPosition().getPositionX() - i - 1, getPosition().getPositionY() + i + 1);
                     }
                 //слон идет влево вниз
-                } else if ((dist.getPositionX() - position.getPositionX() < 0 && dist.getPositionY() - position.getPositionY() < 0)) {
+                } else if ((dist.getPositionX() - getPosition().getPositionX() < 0 && dist.getPositionY() - getPosition().getPositionY() < 0)) {
 
                     for (int i = 0; i < trueWay.length; i++) {
-                        trueWay[i] = new Cell(position.getPositionX() - i - 1, position.getPositionY() - i - 1);
+                        trueWay[i] = new Cell(getPosition().getPositionX() - i - 1, getPosition().getPositionY() - i - 1);
                     }
                 } else {
                     throw new ImpossibleMoveException("Wrong way!");

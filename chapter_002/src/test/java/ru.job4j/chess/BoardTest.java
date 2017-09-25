@@ -22,7 +22,7 @@ public class BoardTest {
         Figure[] figures = new Figure[] {whiteDiagonalBishop, whiteDiagonalBishop2};
         board.setFigures(figures);
         board.move(start, finish);
-        assertThat(figures[0].position, is(finish));
+        assertThat(figures[0].getPosition(), is(finish));
     }
 
     /**
