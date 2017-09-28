@@ -5,36 +5,54 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Класс тестов класса Speed.
+ */
 public class SpeedTest {
-
+    /**
+     * Объект класса Speed.
+     */
     private final Speed test = new Speed();
-    private final int collectionSize = 100000;
-    private final int amount = 50000;
+    /**
+     * Стартовый размер коллекций.
+     */
+    private final int collectionSize = 1000000;
+    /**
+     * Количество добавляемых или удаляемых эл-тов.
+     */
+    private final int amount = 250000;
 
+    /**
+     * Тестируем добавление эл-тов в коллекции.
+     * При стартовом размере коллекции 1000000 при добавлении более 280000 эл-тов тест проваливается.
+     * Т.е. LinkedList быстрее до 280000.
+     */
     @Test
-    public void addTest() {
+    public void whenAddNewElementsToCollectionsThanCompareTime() {
 
         test.generateLists(collectionSize);
         long arrT = test.add(test.getArrayList(), amount);
-        System.out.println(String.format("Добавляем в ArrayList размером %s, %s новых элементов за %s ", collectionSize, amount, arrT));
+        System.out.println(String.format("Add to ArrayList size %s, %s new elements in %s ", collectionSize, amount, arrT));
         long linT = test.add(test.getLinkedList(), amount);
-        System.out.println(String.format("Добавляем в LinkedList размером %s, %s новых элементов за %s ", collectionSize, amount, linT));
+        System.out.println(String.format("Add to LinkedList size %s, %s new elements in %s ", collectionSize, amount, linT));
         long trrT = test.add(test.getTreeSet(), amount);
-        System.out.println(String.format("Добавляем в TreeSet размером %s, %s новых элементов за %s ", collectionSize, amount, trrT));
-
+        System.out.println(String.format("Add to TreeSet size %s, %s new elements in %s ", collectionSize, amount, trrT));
         assertThat(linT > arrT, is(false));
     }
 
+    /**
+     * Тестируем удаление.
+     */
     @Test
-    public void test2() {
+    public void whenDeleteNElementsFromCollectionsThanCompareTime() {
 
         test.generateLists(collectionSize);
         long arrT = test.delete(test.getArrayList(), amount);
-        System.out.println(String.format("Удаляем из ArrayList размером %s, %s первых элементов за %s ", collectionSize, amount, arrT));
+        System.out.println(String.format("Remove from ArrayList size %s, %s first elements in %s ", collectionSize, amount, arrT));
         long linT = test.delete(test.getLinkedList(), amount);
-        System.out.println(String.format("Удаляем из LinkedList размером %s, %s первых элементов за %s ", collectionSize, amount, linT));
+        System.out.println(String.format("Remove from LinkedList size %s, %s first elements in %s ", collectionSize, amount, linT));
         long trrT = test.delete(test.getTreeSet(), amount);
-        System.out.println(String.format("Удаляем из TreeSet размером %s, %s первых элементов за %s ", collectionSize, amount, trrT));
+        System.out.println(String.format("Remove from TreeSet size %s, %s first elements in %s ", collectionSize, amount, trrT));
         assertThat(linT < arrT, is(true));
     }
 

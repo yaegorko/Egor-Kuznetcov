@@ -1,7 +1,7 @@
 /**
- * Discription file for main\ru.job4j.
+ * Третья глава первого курса.
  * @author - Egor K.
- * @since - 29.08.17
+ * @since - 29.09.17
  * @version - $Id$
 */
 package ru.job4j;
