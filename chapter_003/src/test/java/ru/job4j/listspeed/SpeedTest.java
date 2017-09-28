@@ -35,9 +35,11 @@ public class SpeedTest {
         System.out.println(String.format("Add to ArrayList size %s, %s new elements in %s ", collectionSize, amount, arrT));
         long linT = test.add(test.getLinkedList(), amount);
         System.out.println(String.format("Add to LinkedList size %s, %s new elements in %s ", collectionSize, amount, linT));
-        long trrT = test.add(test.getTreeSet(), amount);
-        System.out.println(String.format("Add to TreeSet size %s, %s new elements in %s ", collectionSize, amount, trrT));
-        assertThat(linT > arrT, is(false));
+        long treT = test.add(test.getTreeSet(), amount);
+        System.out.println(String.format("Add to TreeSet size %s, %s new elements in %s ", collectionSize, amount, treT));
+        assertThat(linT < arrT, is(true));
+        assertThat(arrT < treT, is(true));
+
     }
 
     /**
@@ -51,9 +53,10 @@ public class SpeedTest {
         System.out.println(String.format("Remove from ArrayList size %s, %s first elements in %s ", collectionSize, amount, arrT));
         long linT = test.delete(test.getLinkedList(), amount);
         System.out.println(String.format("Remove from LinkedList size %s, %s first elements in %s ", collectionSize, amount, linT));
-        long trrT = test.delete(test.getTreeSet(), amount);
-        System.out.println(String.format("Remove from TreeSet size %s, %s first elements in %s ", collectionSize, amount, trrT));
-        assertThat(linT < arrT, is(true));
+        long treT = test.delete(test.getTreeSet(), amount);
+        System.out.println(String.format("Remove from TreeSet size %s, %s first elements in %s ", collectionSize, amount, treT));
+        assertThat(linT < treT, is(true));
+        assertThat(treT < arrT, is(true));
     }
 
 
