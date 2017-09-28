@@ -16,11 +16,11 @@ public class SpeedTest {
     /**
      * Стартовый размер коллекций.
      */
-    private final int collectionSize = 1000000;
+    private final int collectionSize = 300000;
     /**
      * Количество добавляемых или удаляемых эл-тов.
      */
-    private final int amount = 250000;
+    private final int amount = 50000;
 
     /**
      * Тестируем добавление эл-тов в коллекции.
@@ -58,6 +58,4 @@ public class SpeedTest {
         assertThat(linT < treT, is(true));
         assertThat(treT < arrT, is(true));
     }
-
-
 }
