@@ -47,8 +47,12 @@ public class ConvertList {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 if (count < list.size()) {
-                    array[i][j] = list.get(count);
-                    count++;
+                    if (list.get(count) != null) {
+                        array[i][j] = list.get(count);
+                        count++;
+                    } else {
+                        throw new NullPointerException("Null in list");
+                    }
                 } else {
                     array[i][j] = 0;
                 }

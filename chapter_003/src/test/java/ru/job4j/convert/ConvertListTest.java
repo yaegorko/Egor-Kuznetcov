@@ -90,4 +90,23 @@ public class ConvertListTest {
                                        {0}};
         assertThat(convertList.toArray(initial, rows), is(expected));
     }
+
+    /**
+     * Тест метода toArray.
+     * В листе есть null.
+     */
+    @Test
+    public void whenFromListToArrayWithNullElements() {
+        List<Integer> initial = new ArrayList<>(asList(1, 2, null, 4));
+        int rows = 2;
+        int[][] expected = new int[][]{{1, 2},
+                                       {3, 4}};
+        try {
+            assertThat(convertList.toArray(initial, rows), is(expected));
+        } catch (NullPointerException npe) {
+            assertThat(npe.getMessage(), is("Null in list"));
+        }
+
+
+    }
 }
