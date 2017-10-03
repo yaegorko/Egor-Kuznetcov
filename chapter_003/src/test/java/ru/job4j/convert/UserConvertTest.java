@@ -29,7 +29,7 @@ public class UserConvertTest {
      * Тест метода process.
      */
     @Test
-    public void processTest() {
+    public void whenConvertListToMapWithKeyFromID() {
         UserConvert userConvert = new UserConvert();
         HashMap<Integer, User> result = userConvert.process(generateUserList());
         for (int i = 1; i < 10; i++) {

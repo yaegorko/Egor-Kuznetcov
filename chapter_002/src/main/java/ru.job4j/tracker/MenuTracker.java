@@ -1,6 +1,8 @@
 package ru.job4j.tracker;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  * Класс управления меню.
  * @throws IOException екзепшн
@@ -17,7 +19,7 @@ public class MenuTracker {
     /**
      * Массив действий с меню.
      */
-    private UserAction[] actions = new UserAction[7];
+    private ArrayList<UserAction> actions = new ArrayList<>();
 
     /**
      * Конструктор.
@@ -37,13 +39,13 @@ public class MenuTracker {
     public int fillActions() {
 
         int count = 0;
-        this.actions[count] = new AddItem("Add task", count++);
-        this.actions[count] = new ShowAll("Show all tasks", count++);
-        this.actions[count] = new UpdateTask("Edit task", count++);
-        this.actions[count] = new DeleteTask("Delete task", count++);
-        this.actions[count] = new FindByID("Find task by ID", count++);
-        this.actions[count] = new FindByName("Find task by name", count++);
-        this.actions[count] = new ExitProgram("Exit", count++);
+        this.actions.add(count, new AddItem("Add task", count++));
+        this.actions.add(count, new ShowAll("Show all tasks", count++));
+        this.actions.add(count, new UpdateTask("Edit task", count++));
+        this.actions.add(count, new DeleteTask("Delete task", count++));
+        this.actions.add(count, new FindByID("Find task by ID", count++));
+        this.actions.add(count, new FindByName("Find task by name", count++));
+        this.actions.add(count, new ExitProgram("Exit", count++));
 
         return count;
     }
@@ -55,7 +57,7 @@ public class MenuTracker {
      */
     public void select(int key) throws IOException {
 
-        this.actions[key].execute(this.input, this.tracker);
+        this.actions.get(key).execute(this.input, this.tracker);
     }
 
     /**
@@ -123,9 +125,9 @@ public class MenuTracker {
          */
         public void execute(Input input, Tracker tracker) throws IOException {
 
-            Item[] arrayOfAllItemInTracker = tracker.findAll();
+            ArrayList<Item> arrayOfAllItemInTracker = tracker.findAll();
 
-            if (arrayOfAllItemInTracker.length == 0) {
+            if (arrayOfAllItemInTracker.size() == 0) {
                 System.out.println("No task in tracker!");
                 System.out.println();
             }
@@ -249,7 +251,7 @@ class FindByName extends BaseAction {
     public void execute(Input input, Tracker tracker) throws IOException {
 
         System.out.println();
-        Item[] findItems = tracker.findByName(input.ask("Enter the name: "));
+        ArrayList<Item> findItems = tracker.findByName(input.ask("Enter the name: "));
         System.out.println("Founded Items: ");
         for (Item allFindItems : findItems) {
             if (allFindItems != null) {

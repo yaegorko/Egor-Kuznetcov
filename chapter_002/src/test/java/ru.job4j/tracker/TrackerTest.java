@@ -1,6 +1,9 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -26,7 +29,7 @@ public class TrackerTest {
     /**
      * третий.
      */
-    private final Item thirdItem = new Item("test3", "Description2", 456L);
+    private final Item thirdItem = new Item("test3", "Description3", 456L);
 
     /**
      * Тест метода add.
@@ -43,10 +46,10 @@ public class TrackerTest {
     @Test
     public void whenUpdateItemWithSameIdThenReturnNewName() {
         tracker.add(firstItem);
-        assertThat(tracker.findAll()[0], is(firstItem));
+        assertThat(tracker.findAll().get(0), is(firstItem));
         secondItem.setId(firstItem.getId());
         tracker.update(secondItem);
-        assertThat(tracker.findAll()[0], is(secondItem));
+        assertThat(tracker.findAll().get(0), is(secondItem));
     }
 
     /**
@@ -60,9 +63,9 @@ public class TrackerTest {
         tracker.add(thirdItem);
         tracker.add(thirdItem);
         tracker.delete(secondItem);
-        assertThat(tracker.findAll()[0], is(firstItem));
-        assertThat(tracker.findAll()[1], is(thirdItem));
-        assertThat(tracker.findAll()[2], is(thirdItem));
+        assertThat(tracker.findAll().get(0), is(firstItem));
+        assertThat(tracker.findAll().get(1), is(thirdItem));
+        assertThat(tracker.findAll().get(2), is(thirdItem));
     }
 
     /**
@@ -72,16 +75,16 @@ public class TrackerTest {
     public void whenGetAllNotNullItemThenReturnNewArrayLength() {
 
         tracker.add(firstItem);
-        Item[] result = tracker.findAll();
-        assertThat(result.length, is(1));
+        ArrayList<Item> result = tracker.findAll();
+        assertThat(result.size(), is(1));
         tracker.add(secondItem);
         result = tracker.findAll();
-        assertThat(result.length, is(2));
+        assertThat(result.size(), is(2));
         tracker.add(thirdItem);
         result = tracker.findAll();
-        assertThat(result.length, is(3));
+        assertThat(result.size(), is(3));
     }
-
+//
     /**
      * тест метода findByName.
      */
@@ -94,9 +97,9 @@ public class TrackerTest {
             tracker.add(thirdItem);
             firstItemCounter++;
         }
-        Item[] result = tracker.findByName("test1");
-        for (int i = 0; i < result.length - firstItemCounter * 2; i++) {
-            assertThat(result[i].getName(), is("test1"));
+        ArrayList<Item> result = tracker.findByName("test1");
+        for (int i = 0; i < result.size() - firstItemCounter * 2; i++) {
+            assertThat(result.get(i).getName(), is("test1"));
         }
     }
 }

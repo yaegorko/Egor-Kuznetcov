@@ -27,7 +27,7 @@ public class StubInputTest {
         Input input = new StubInput(new String[]{"0", "test name", "desc", "n", "6", "y"});
         new StartUi(input, tracker).init();     //   создаём StartUI и вызываем метод init()
         // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
-        assertThat(tracker.findAll()[0].getName(), is("test name"));
+        assertThat(tracker.findAll().get(0).getName(), is("test name"));
     }
 
     /**
@@ -40,7 +40,7 @@ public class StubInputTest {
         tracker.add(new Item());
         Input input = new StubInput(new String[]{"1", "n", "6", "y"});
         new StartUi(input, tracker).init();
-        assertThat(tracker.findAll().length, is(2));
+        assertThat(tracker.findAll().size(), is(2));
     }
 
     /**
@@ -67,11 +67,12 @@ public class StubInputTest {
      */
     @Test
     public void whenDeleteTaskThanCheckNewArrayLength() throws IOException {
-        Item item = tracker.add(new Item());
+        Item item = tracker.add(new Item("test task", "test description"));
+        Item item2 = tracker.add(new Item("test task2", "test description2"));
         Input input = new StubInput(new String[]{"3", item.getId(), "n", "6", "y"});
-        assertThat(tracker.findAll().length, is(1));
+        assertThat(tracker.findAll().size(), is(2));
         new StartUi(input, tracker).init();
-        assertThat(tracker.findAll().length, is(0));
+        assertThat(tracker.findAll().size(), is(1));
     }
 
     /**
@@ -96,6 +97,6 @@ public class StubInputTest {
         Item item2 = tracker.add(new Item("findByNameName", "findByNameDesc2"));
         Input input = new StubInput(new String[]{"5", item.getName(), "n", "6", "y"});
         new StartUi(input, tracker).init();
-        assertThat(tracker.findByName("findByNameName").length, is(2));
+        assertThat(tracker.findByName("findByNameName").size(), is(2));
     }
 }

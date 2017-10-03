@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -13,9 +14,9 @@ public class Tracker {
     /**
      * Массив заявок.
      */
-    private Item[] items = new Item[100];
+    private ArrayList<Item> items = new ArrayList<>();
     /**
-     * Переменная отвечающая за индекс элемента массива.
+     * Переменная отвечающая за индекс элемента листа.
      */
     private int position = 0;
     /**
@@ -33,8 +34,8 @@ public class Tracker {
     public Item add(Item item) {
 
         item.setId(this.generateID());
-        this.items[position++] = item;
-        return this.items[position - 1];
+        this.items.add(position++, item);
+        return this.items.get(position - 1);
     }
 
     /**
@@ -54,12 +55,11 @@ public class Tracker {
     public void update(Item item) {
 
         for (int index = 0; index < position; index++) {
-            if (this.items[index] != null && item.getId().equals(this.items[index].getId())) {
-                this.items[index] = item;
+            if (this.items.get(index) != null && item.getId().equals(this.items.get(index).getId())) {
+                this.items.add(index, item);
                 return;
             }
         }
-
         System.out.println("No one task with same ID!");
     }
 
@@ -73,43 +73,48 @@ public class Tracker {
     public void delete(Item item) {
 
         if (position == 0) {
-
             System.out.println("No one task in tracker!");
             return;
 
         } else {
-
-            Item[] newArray = new Item[this.position - 1];
-            for (int index = 1; index < position + 1; index++) {
-                if (this.items[index - 1] != null && item.getId().equals(this.items[index - 1].getId())) {
-                    System.arraycopy(this.items, 0, newArray, 0, index - 1);
-                    System.arraycopy(this.items, index, newArray, index - 1, this.position - index);
-                    System.arraycopy(newArray, 0, this.items, 0, newArray.length);
-                    this.items[this.position - 1] = null;
-                    this.position--;
+            for (int index = 0; index < position; index++) {
+                if (this.items.get(index) != null && item.getId().equals(this.items.get(index).getId())) {
+                    this.items.remove(index);
                     System.out.println("The task with ID " + item.getId() + " was deleted");
                     return;
-
                 }
             }
+//-------------------------------- Удалял методом сдвига влево, когда был массив. На память и для примера.
+//            Item[] newArray = new Item[this.position - 1];
+//            for (int index = 1; index < position + 1; index++) {
+//                if (this.items[index - 1] != null && item.getId().equals(this.items[index - 1].getId())) {
+//                    System.arraycopy(this.items, 0, newArray, 0, index - 1);
+//                    System.arraycopy(this.items, index, newArray, index - 1, this.position - index);
+//                    System.arraycopy(newArray, 0, this.items, 0, newArray.length);
+//                    this.items[this.position - 1] = null;
+//                    this.position--;
+//                    System.out.println("The task with ID " + item.getId() + " was deleted");
+//                    return;
+//
+//                }
+//            }
+// --------------------------------
         }
-
         System.out.println("No one task in tracker with same ID!");
     }
-
 
     /**
      * Метод возвращает все не нулевые эл-ты массива заявок.
      * @return массив ненулевых эл-тов массива заявок.
      */
-    public Item[] findAll() {
+    public ArrayList<Item> findAll() {
 
-        Item[] resultArray = new Item[position];
+        ArrayList<Item> resultArray = new ArrayList<>();
 
         int resultArrayIndex = 0;
         for (Item itemsInArray : items) {
             if (itemsInArray != null) {
-                resultArray[resultArrayIndex] = itemsInArray;
+                resultArray.add(resultArrayIndex, itemsInArray);
                 resultArrayIndex++;
             }
         }
@@ -121,13 +126,13 @@ public class Tracker {
      * @param key имя итема.
      * @return массив эл-тов с именем key.
      */
-    public Item[] findByName(String key) {
+    public ArrayList<Item> findByName(String key) {
 
-        Item[] resultArray = new Item[position];
+        ArrayList<Item> resultArray = new ArrayList<>();
         int resultArrayIndex = 0;
         for (int index = 0; index < position; index++) {
-            if (this.items[index] != null && key.equals(this.items[index].getName())) {
-                resultArray[resultArrayIndex] = this.items[index];
+            if (this.items.get(index) != null && key.equals(this.items.get(index).getName())) {
+                resultArray.add(resultArrayIndex, this.items.get(index));
                 resultArrayIndex++;
             }
         }
@@ -140,6 +145,7 @@ public class Tracker {
      * @return элемент с уникальным ID.
      */
     public Item findById(String id) {
+
         Item result = null;
         for (Item itemInArray : this.items) {
             if (itemInArray != null && itemInArray.getId().equals(id)) {
