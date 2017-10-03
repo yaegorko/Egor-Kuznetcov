@@ -114,7 +114,7 @@ public class ConvertListTest {
      * Тест матода convert.
      */
     @Test
-    public void testTemp() {
+    public void whenFromListOfArraysOfIntToListOfInteger() {
         List<int[]> initial = new ArrayList<>();
         initial.add(new int[]{1, 2});
         initial.add(new int[]{3, 4, 5, 6});

@@ -66,7 +66,7 @@ public class ConvertList {
      * @param list лист массивов.
      * @return Лист эл-тов массивов.
      */
-    public List<Integer> convert (List<int[]> list) {
+    public List<Integer> convert(List<int[]> list) {
 
         List<Integer> resultList = new ArrayList<>();
 
@@ -75,7 +75,6 @@ public class ConvertList {
                 resultList.add(arrayElement);
             }
         }
-
         return resultList;
     }
 }
