@@ -60,4 +60,22 @@ public class ConvertList {
         }
         return array;
     }
+
+    /**
+     * Из листа массивов разной длинны конвертим в общий лист из эл-тов всех массивов.
+     * @param list лист массивов.
+     * @return Лист эл-тов массивов.
+     */
+    public List<Integer> convert (List<int[]> list) {
+
+        List<Integer> resultList = new ArrayList<>();
+
+        for (int[] listElement: list) {
+            for (int arrayElement: listElement) {
+                resultList.add(arrayElement);
+            }
+        }
+
+        return resultList;
+    }
 }

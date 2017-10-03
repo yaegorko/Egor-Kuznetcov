@@ -109,4 +109,17 @@ public class ConvertListTest {
 
 
     }
+
+    /**
+     * Тест матода convert.
+     */
+    @Test
+    public void testTemp() {
+        List<int[]> initial = new ArrayList<>();
+        initial.add(new int[]{1, 2});
+        initial.add(new int[]{3, 4, 5, 6});
+        List<Integer> result = convertList.convert(initial);
+        List<Integer> expected = new ArrayList<>(asList(1, 2, 3, 4, 5, 6));
+        assertThat(result, is(expected));
+    }
 }

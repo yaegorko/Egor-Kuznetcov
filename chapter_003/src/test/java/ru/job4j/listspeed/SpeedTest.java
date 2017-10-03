@@ -16,11 +16,11 @@ public class SpeedTest {
     /**
      * Стартовый размер коллекций.
      */
-    private final int collectionSize = 300000;
+    private final int collectionSize = 1000000;
     /**
      * Количество добавляемых или удаляемых эл-тов.
      */
-    private final int amount = 50000;
+    private final int amount = 290000;
 
     /**
      * Тестируем добавление эл-тов в коллекции.
