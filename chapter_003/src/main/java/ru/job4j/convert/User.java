@@ -3,7 +3,7 @@ package ru.job4j.convert;
 /**
  * User.
  */
-public class User {
+public class User implements Comparable<User> {
     /**
      * Id.
      */
@@ -16,6 +16,19 @@ public class User {
      * City.
      */
     private String city;
+
+    /**
+     * Возраст.
+     */
+    private Integer age;
+
+    /**
+     * Getter AGE.
+     * @return age.
+     */
+    public Integer getAge() {
+        return age;
+    }
 
     /**
      * Getter Id.
@@ -42,7 +55,7 @@ public class User {
     }
 
     /**
-     * Конструктор.
+     * Конструктор UserConvertTest.
      * @param id Ид
      * @param name Имя
      * @param city Город
@@ -51,5 +64,43 @@ public class User {
         this.id = id;
         this.name = name;
         this.city = city;
+    }
+
+    /**
+     * Конструктор UserSortTest.
+     * @param name Имя
+     * @param age Возраст.
+     */
+    public User(String name, Integer age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    /**
+     * Переопределяем compareTo для сортировки по возрасту.
+     * @param o предаем объект для сравнения с текущим.
+     * @return отрицательное если o.age > this.age, 0 если равны, положительное если o.age < this.age
+     */
+    @Override
+    public int compareTo(User o) {
+        return this.age - o.age;
+    }
+
+//    Если хотим сортировать по имени
+//    @Override
+//    public int compareTo(User o) {
+//        return this.name.compareTo(o.name);
+//    }
+
+    /**
+     * Переопределяем туСтринг.
+     * @return Имя и возраст.
+     */
+    @Override
+    public String toString() {
+        return "User{"
+                + "name='" + name + '\''
+                + ", age=" + age
+                + '}';
     }
 }
