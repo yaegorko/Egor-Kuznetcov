@@ -84,7 +84,7 @@ public class TrackerTest {
         result = tracker.findAll();
         assertThat(result.size(), is(3));
     }
-//
+
     /**
      * тест метода findByName.
      */

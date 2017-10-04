@@ -78,12 +78,15 @@ public class User implements Comparable<User> {
 
     /**
      * Переопределяем compareTo для сортировки по возрасту.
+     * Если возраст у юзеров одинаков, считаем что он разный (возвращаем -1),
+     * т.к в обратном случае один из нах в Set не попадет.
      * @param o предаем объект для сравнения с текущим.
      * @return отрицательное если o.age > this.age, 0 если равны, положительное если o.age < this.age
      */
     @Override
     public int compareTo(User o) {
-        return this.age - o.age;
+
+        return this.age == o.age ? -1 : Integer.compare(this.age, o.age);
     }
 
 //    Если хотим сортировать по имени
@@ -99,8 +102,8 @@ public class User implements Comparable<User> {
     @Override
     public String toString() {
         return "User{"
-                + "name='" + name + '\''
-                + ", age=" + age
-                + '}';
+                + "name= '" + name + '\''
+                + ", age= " + age
+                + '}' + "\r\n";
     }
 }
