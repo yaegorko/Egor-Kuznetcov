@@ -5,6 +5,9 @@ public class Account {
     private int value;
     private int requisites;
 
+    public Account() {
+    }
+
     public Account(int value, int requisites) {
         this.value = value;
         this.requisites = requisites;

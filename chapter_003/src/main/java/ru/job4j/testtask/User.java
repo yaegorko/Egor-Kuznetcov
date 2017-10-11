@@ -5,22 +5,9 @@ public class User {
     private String name;
     private String passport;
 
-
-
-    private Account account;
-
-    public User(String name, String passport, Account account) {
+    public User(String name, String passport) {
         this.name = name;
         this.passport = passport;
-        this.account = account;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
     }
 
     public String getName() {
@@ -39,17 +26,34 @@ public class User {
         this.passport = passport;
     }
 
-
-
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this != o) {
+            if (o == null || getClass() != o.getClass()) return false;
 
-        User user = (User) o;
+            User user = (User) o;
 
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
-        return passport != null ? passport.equals(user.passport) : user.passport == null;
+            if (name != null) {
+                if (!name.equals(user.name)) {
+                    return false;
+                }
+            } else {
+                if (user.name != null) {
+                    return false;
+                }
+            }
+            if (passport != null) {
+                if (passport.equals(user.passport)) {
+                    return true;
+                } else return false;
+            } else {
+                if (user.passport == null) {
+                    return true;
+                } else return false;
+            }
+        } else {
+            return true;
+        }
     }
 
     @Override
