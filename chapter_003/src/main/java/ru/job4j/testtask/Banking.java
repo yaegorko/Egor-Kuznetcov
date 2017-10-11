@@ -1,17 +1,35 @@
 package ru.job4j.testtask;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import static java.util.Arrays.asList;
 
+/**
+ * Класс для операций с счетами и пользователями.
+ */
 public class Banking {
+    /**
+     * Map для хранения информации о пользователях и банковских счетах.
+     */
+    private Map<User, List<Account>> usersBankAccounts = new HashMap<>();
 
+    /**
+     * Получить Мапу. Использую только в тестах.
+     * @return usersBankAccounts
+     */
     public Map<User, List<Account>> getUsersBankAccounts() {
         return usersBankAccounts;
     }
 
-    private Map<User, List<Account>> usersBankAccounts = new HashMap<>();
-
+    /**
+     * Проверяем наличие или отсутствие регистрации пользователя в системе.
+     * @param user пользователь
+     * @return registration (true если пользователь уже есть в хранилище)
+     */
     public boolean checkUser(User user) {
         boolean registration = false;
         if (this.usersBankAccounts.containsKey(user)) {
@@ -20,6 +38,11 @@ public class Banking {
         return registration;
     }
 
+    /**
+     * Проверяем существование счета у всех пользователей.
+     * @param account номер счета.
+     * @return true если счета с таким номером еще не существут.
+     */
     public boolean checkAccount(Account account) {
         for (List<Account> accounts: usersBankAccounts.values()) {
             for (Account requisitesInAccounts : accounts) {
@@ -31,6 +54,12 @@ public class Banking {
         return true;
     }
 
+    /**
+     * Проверяем принадлежность счета конкретному пользователю.
+     * @param user пользователь.
+     * @param account номер счета.
+     * @return true если счет принадлежит пользователю.
+     */
     public boolean checkAccount(User user, Account account) {
         List<Account> accounts = usersBankAccounts.get(user);
         for (Account userAccounts : accounts) {
@@ -41,10 +70,20 @@ public class Banking {
         return false;
     }
 
+    /**
+     * Проверяем достаточность денег на счету.
+     * @param account номер счета для проверки.
+     * @param amount необходимое количество денег для операции.
+     * @return true если денег достаточно.
+     */
     public boolean checkValue(Account account, double amount) {
         return account.getValue() >= amount ? true : false;
     }
 
+    /**
+     * Автоматически генерируем номер счета при создании пользователя.
+     * @return готовый аккаунт с номером счета и нулевым балансом.
+     */
     public Account generateAccount() {
         Account account = new Account();
         Random random = new Random();
@@ -59,6 +98,10 @@ public class Banking {
         return account;
     }
 
+    /**
+     * Добавляем пользователя в систему.
+     * @param user пользователь для добавления.
+     */
     public void addUser(User user) {
         if (!checkUser(user)) {
             for (User users: usersBankAccounts.keySet()) {
@@ -73,6 +116,10 @@ public class Banking {
         }
     }
 
+    /**
+     * Удаляем пользователя из системы.
+     * @param user пользователь для удаления.
+     */
     public void deleteUser(User user) {
         if (checkUser(user)) {
             this.usersBankAccounts.remove(user);
@@ -81,6 +128,11 @@ public class Banking {
         }
     }
 
+    /**
+     * Добавляем пользователю в системе новый счет.
+     * @param user пользователь в системе.
+     * @param account новый счет.
+     */
     public void addAccountToUser(User user, Account account) {
         if (checkUser(user)) {
             if (checkAccount(account)) {
@@ -95,6 +147,11 @@ public class Banking {
         }
     }
 
+    /**
+     * Удаляем счет пользователя.
+     * @param user пользователь в системе у которого нужно удалить счет.
+     * @param account счет для удаления.
+     */
     public void deleteAccountFromUser(User user, Account account) {
         if (checkUser(user)) {
             if (checkAccount(user, account)) {
@@ -109,6 +166,11 @@ public class Banking {
         }
     }
 
+    /**
+     * Получаем все счета пользователя.
+     * @param user пользователь в системе.
+     * @return ArrayList со всеми счетами пользователя.
+     */
     public List<Account> getUserAccounts(User user) {
         List<Account> userAccounts = new ArrayList<>();
         if (checkUser(user)) {
@@ -119,7 +181,16 @@ public class Banking {
         return userAccounts;
     }
 
-    public boolean transferMoney (User srcUser, Account srcAccount, User dstUser, Account dstAccount, double amount) {
+    /**
+     * Метод для перевода денег с одного счета на другой.
+     * @param srcUser пользователь с чьего счета переводим деньги.
+     * @param srcAccount счет с которого переводим деньги.
+     * @param dstUser пользователь на чей счет переводим деньги.
+     * @param dstAccount счет на который переводим деньги.
+     * @param amount количество денег для перевода.
+     * @return true если перевод успешно произведен.
+     */
+    public boolean transferMoney(User srcUser, Account srcAccount, User dstUser, Account dstAccount, double amount) {
         if (checkUser(srcUser)) {
             if (checkUser(dstUser)) {
                 if (checkAccount(srcUser, srcAccount)) {
@@ -146,5 +217,4 @@ public class Banking {
         }
         return false;
     }
-
 }
