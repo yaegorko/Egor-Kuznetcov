@@ -2,7 +2,7 @@ package ru.job4j.testtask;
 
 public class Account {
 
-    private int value;
+    private double value;
     private int requisites;
 
     public Account() {
@@ -13,11 +13,11 @@ public class Account {
         this.requisites = requisites;
     }
 
-    public int getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(double value) {
         this.value = value;
     }
 
