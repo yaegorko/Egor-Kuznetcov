@@ -191,30 +191,25 @@ public class Banking {
      * @return true если перевод успешно произведен.
      */
     public boolean transferMoney(User srcUser, Account srcAccount, User dstUser, Account dstAccount, double amount) {
-        if (checkUser(srcUser)) {
-            if (checkUser(dstUser)) {
-                if (checkAccount(srcUser, srcAccount)) {
-                    if (checkAccount(dstUser, dstAccount)) {
-                        if (checkValue(srcAccount, amount)) {
-                            srcAccount.setValue(srcAccount.getValue() - amount);
-                            dstAccount.setValue(dstAccount.getValue() + amount);
-                            System.out.println(String.format("На счет %s переведено %s", dstAccount.getRequisites(), amount));
-                            return true;
-                        } else {
-                            System.out.println(String.format("У пользователя %s на счету %s недостаточно средств", srcUser.getName(), srcAccount.getRequisites()));
-                        }
-                    } else {
-                        System.out.println(String.format("У пользователя %s нет счета %s", dstUser.getName(), dstAccount.getRequisites()));
-                    }
-                } else {
-                    System.out.println(String.format("У пользователя %s нет счета %s", srcUser.getName(), srcAccount.getRequisites()));
-                }
-            } else {
-                System.out.println(String.format("Пользователя %s нет в системе!", dstUser.getName()));
-            }
-        } else {
+
+        boolean transfer = false;
+
+        if (!checkUser(srcUser)) {
             System.out.println(String.format("Пользователя %s нет в системе!", srcUser.getName()));
+        } else if (!checkUser(dstUser)) {
+            System.out.println(String.format("Пользователя %s нет в системе!", dstUser.getName()));
+        } else if (!checkAccount(srcUser, srcAccount)) {
+            System.out.println(String.format("У пользователя %s нет счета %s", srcUser.getName(), srcAccount.getRequisites()));
+        } else if (!checkAccount(dstUser, dstAccount)) {
+            System.out.println(String.format("У пользователя %s нет счета %s", dstUser.getName(), dstAccount.getRequisites()));
+        } else if (!checkValue(srcAccount, amount)) {
+            System.out.println(String.format("У пользователя %s на счету %s недостаточно средств", srcUser.getName(), srcAccount.getRequisites()));
+        } else {
+            srcAccount.setValue(srcAccount.getValue() - amount);
+            dstAccount.setValue(dstAccount.getValue() + amount);
+            System.out.println(String.format("На счет %s переведено %s", dstAccount.getRequisites(), amount));
+            transfer = true;
         }
-        return false;
+        return transfer;
     }
 }
