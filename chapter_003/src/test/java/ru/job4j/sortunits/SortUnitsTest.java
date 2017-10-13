@@ -1,14 +1,16 @@
 package ru.job4j.sortunits;
 
+import org.junit.Test;
+
 public class SortUnitsTest {
 
-    String[] units = new String[]{  "K1",
-                                    "K2",
-                                    "K1\\SK1",
+    SortUnits sortUnits = new SortUnits();
+
+    String[] units = new String[]{  "K1\\SK1",
                                     "K1\\SK2",
-                                    "K2\\SK1",
                                     "K1\\SK1\\SSK1",
                                     "K1\\SK1\\SSK2",
+                                    "K2",
                                     "K2\\SK1\\SSK1",
                                     "K2\\SK1\\SSK2"};
 
@@ -21,5 +23,10 @@ public class SortUnitsTest {
                                       "K2\\SK1",
                                       "K2\\SK1\\SSK1",
                                       "K2\\SK1\\SSK2"};
+
+    @Test
+    public void test1() {
+        sortUnits.parseUnits(units);
+    }
 
 }
