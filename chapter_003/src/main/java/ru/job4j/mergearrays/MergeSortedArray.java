@@ -21,16 +21,12 @@ public class MergeSortedArray {
             sorter[i] = sortedOne[indexOne] <= sortedTwo[indexTwo] ? sortedOne[indexOne++] : sortedTwo[indexTwo++];
 
             if (indexOne == sortedOne.length) {
-               while (indexOne + indexTwo < sorter.length) {
-                   sorter[indexOne + indexTwo] = sortedTwo[indexTwo++];
-               }
-               break;
+                System.arraycopy(sortedTwo, indexTwo, sorter, i + 1, sortedTwo.length - indexTwo);
+                break;
             }
 
             if (indexTwo == sortedTwo.length) {
-                while (indexTwo + indexOne < sorter.length) {
-                    sorter[indexTwo + indexOne] = sortedOne[indexOne++];
-                }
+                System.arraycopy(sortedOne, indexOne, sorter, i + 1, sortedOne.length - indexOne);
                 break;
             }
         }
