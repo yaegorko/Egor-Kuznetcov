@@ -47,10 +47,9 @@ public class MatrixIterator implements Iterator {
             indexX = 0;
             indexY++;
         }
-        if (indexY == matrix.length) {
-            throw new NoSuchElementException();
-        } else {
+        if (indexY < matrix.length) {
             return matrix[indexY][indexX++];
         }
+        throw new NoSuchElementException();
     }
 }
