@@ -34,9 +34,7 @@ public class MatrixIterator implements Iterator {
      * @return true, false.
      */
     public boolean hasNext() {
-
         return matrix.length + matrix[indexY].length - 1 > indexX + indexY;
-
     }
 
     /**
