@@ -25,13 +25,25 @@ public class EvenIterator implements Iterator {
     }
 
     /**
-     * Метод возвращающий true если есть следующий элемент в массиве.
-     * false если достигнут конец
+     * Метод возвращающий true если есть следующий четный элемент в массиве.
+     * false если достигнут конец или такого эл-та нет.
      * @return true, false.
      */
     @Override
     public boolean hasNext() {
-        return array.length - 1 > index;
+
+        int indexHasNext = index;
+        boolean nextEven = false;
+
+        while (indexHasNext < array.length) {
+            if (array[indexHasNext] % 2 == 0) {
+                nextEven = true;
+                break;
+            } else {
+                indexHasNext++;
+            }
+        }
+        return nextEven;
     }
 
     /**

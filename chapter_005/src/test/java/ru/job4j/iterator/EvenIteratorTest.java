@@ -45,6 +45,7 @@ public class EvenIteratorTest {
     @Test(expected = NoSuchElementException.class)
     public void noOneEvenElementsInArray() {
         EvenIterator it = new EvenIterator(new int[]{1, 3, 5, 7});
+        assertThat(it.hasNext(), is(false));
         it.next();
     }
 }
