@@ -61,6 +61,7 @@ public class PrimeNumberIteratorTest {
     @Test(expected = NoSuchElementException.class)
     public void arrayHaveManyNegativeNumbers() {
         PrimeNumberIterator it = new PrimeNumberIterator(new int[]{-1, -3, 0, 1});
+        assertThat(it.hasNext(), is(false));
         it.next();
     }
 

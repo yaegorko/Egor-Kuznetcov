@@ -12,12 +12,12 @@ public class PrimeNumberIterator implements Iterator {
      */
     private int[] array;
     /**
-     * индекс массива.
+     * Индекс массива.
      */
     private int index = 0;
-
     /**
      * Конструктор.
+     *
      * @param array массив.
      */
     public PrimeNumberIterator(int[] array) {
@@ -26,6 +26,7 @@ public class PrimeNumberIterator implements Iterator {
 
     /**
      * Чекаем простое число или нет.
+     *
      * @param number число - эл-т массива array.
      * @return true если простое.
      */
@@ -33,27 +34,42 @@ public class PrimeNumberIterator implements Iterator {
 
         boolean prime = true;
 
-        for (int i = 2; i < number; i++) {
-            if (number % i == 0) {
-                prime = false;
-                this.index++;
-                break;
+        if (number <= 1) {
+            prime = false;
+        } else {
+            for (int i = 2; i < number; i++) {
+                if (number % i == 0) {
+                    prime = false;
+                    break;
+                }
             }
         }
         return prime;
     }
 
     /**
-     *
-     * Метод возвращающий true если есть следующий элемент в массиве.
-     * false если достигнут конец
-     * @return true, false
-     * @return
+     * Метод возвращающий true если есть следующий элемент - простое число в массиве,
+     * false если достигнут конец или такого числа нет.
+     * @return nextPrime
      */
     @Override
     public boolean hasNext() {
-        return array.length > index;
+
+        int indexHasNext = index;
+        boolean nextPrime = false;
+
+        while (indexHasNext < array.length ) {
+            if (checkPrime(array[indexHasNext])) {
+                nextPrime = true;
+                break;
+            } else {
+                indexHasNext++;
+            }
+        }
+        return nextPrime;
     }
+
+
 
     /**
      * Метод next проверяет текущий элемент, если он простое число, то возвращает его
@@ -64,12 +80,11 @@ public class PrimeNumberIterator implements Iterator {
     public Object next() {
 
         while (index < array.length) {
-
-            if (array[index] <= 1) {
-                index++;
-            } else if (checkPrime(array[index])) {
+           if (checkPrime(array[index])) {
                 return array[index++];
-            }
+           } else {
+               index++;
+           }
         }
         throw new NoSuchElementException();
     }
