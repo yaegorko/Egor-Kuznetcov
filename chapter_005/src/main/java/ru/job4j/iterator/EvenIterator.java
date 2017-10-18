@@ -55,7 +55,7 @@ public class EvenIterator implements Iterator {
 //        }
 //---------------------------------------
 
-        while (index<array.length) {
+        while (index < array.length) {
             if (array[index] % 2 != 0) {
                 index++;
             } else {
