@@ -55,18 +55,6 @@ public class EvenIterator implements Iterator {
     @Override
     public Object next() {
 
-// рабочий код с помощью рекурсии.
-//        if (index == array.length) {
-//            throw new NoSuchElementException();
-//        }
-//        if (array[index] % 2 != 0) {
-//            index++;
-//            return next();
-//        } else {
-//            return array[index++];
-//        }
-//---------------------------------------
-
         while (index < array.length) {
             if (array[index] % 2 != 0) {
                 index++;
