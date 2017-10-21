@@ -3,27 +3,32 @@ package ru.job4j.iterator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Класс итератор итераторов.
+ */
 public class Converter {
-
+    /**
+     * Метод конвертирующий объект итератор итераторов и возвращающий
+     * итератор чисел.
+     * @param it итератор итераторов.
+     * @return итератор чсел.
+     */
     public Iterator<Integer> convert(Iterator<Iterator> it) {
 
         return new Iterator<Integer>() {
 
-            Iterator<Integer> iterator = it.next();
+            private Iterator<Integer> iterator = it.next();
 
             @Override
             public boolean hasNext() {
-                if (iterator.hasNext()){
-                     while (iterator.hasNext()){
-                        return true;
-                     }
+                if (iterator.hasNext()) {
+                    return true;
+                } else if (it.hasNext()) {
+                    iterator = it.next();
+                    return true;
                 } else {
-                    if (it.hasNext()) {
-                        iterator = it.next();
-                        return true;
-                    }
+                    return false;
                 }
-                return false;
             }
 
             @Override

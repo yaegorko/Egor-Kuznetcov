@@ -58,7 +58,7 @@ public class PrimeNumberIterator implements Iterator {
         int indexHasNext = index;
         boolean nextPrime = false;
 
-        while (indexHasNext < array.length ) {
+        while (indexHasNext < array.length) {
             if (checkPrime(array[indexHasNext])) {
                 nextPrime = true;
                 break;
