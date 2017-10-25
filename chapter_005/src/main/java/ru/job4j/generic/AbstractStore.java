@@ -1,16 +1,14 @@
 package ru.job4j.generic;
 
-public abstract class AbstractStore implements Store {
-
-
+public abstract class AbstractStore<T extends Base> implements Store<T> {
 
     @Override
-    public Base add(Base model) {
+    public T add(T model) {
         return null;
     }
 
     @Override
-    public Base update(Base model) {
+    public T update(T model) {
         return null;
     }
 

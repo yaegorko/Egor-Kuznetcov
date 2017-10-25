@@ -4,5 +4,7 @@ public class RoleStore extends AbstractStore{
 
     private SimpleArray<Base>[] roles = new SimpleArray[50];
 
+    public void roleAdd() {
 
+    }
 }

@@ -2,13 +2,15 @@ package ru.job4j.generic;
 
 public class Role extends Base {
 
+    private String id;
+
     @Override
-    String getId() {
-        return null;
+    public String getId() {
+        return id;
     }
 
     @Override
-    void setId(String id) {
-
+    public void setId(String id) {
+        this.id = id;
     }
 }
