@@ -2,15 +2,11 @@ package ru.job4j.generic;
 
 public class User extends Base {
 
-    private String id;
-
-    @Override
-    public String getId() {
-        return id;
+    public User(String id) {
+        super(id);
     }
 
-    @Override
-    public void setId(String id) {
-        this.id = id;
+    public User(String id, String body) {
+        super(id, body);
     }
 }

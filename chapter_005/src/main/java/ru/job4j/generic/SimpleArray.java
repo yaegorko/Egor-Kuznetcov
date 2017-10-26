@@ -11,11 +11,15 @@ public class SimpleArray<T> {
      * Массив объектов.
      */
     private Object[] objects;
+
     /**
      * Индекс массива.
      */
     private int index = 0;
 
+    public int getIndex() {
+        return index;
+    }
     /**
      * В конструкторе задаем размер массива.
      * @param size размер
@@ -52,7 +56,6 @@ public class SimpleArray<T> {
             this.index--;
         }
     }
-
     /**
      * Получить элемент.
      * @param position номер элемента.
@@ -62,4 +65,5 @@ public class SimpleArray<T> {
 
         return (T) this.objects[position];
     }
+
 }
