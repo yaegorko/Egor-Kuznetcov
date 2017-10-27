@@ -31,10 +31,10 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
      * @param id Id объекта.
      * @return позицию объекта если он есть в хранилище или -1 если такого объекта нет.
      */
-    public int checkPositionByID(SimpleArray simpleArray, String id) {
+    public int checkPositionByID(SimpleArray<T> simpleArray, String id) {
         int position = 0;
         while (simpleArray.getIndex() > 0 && simpleArray.getIndex() > position) {
-            if ((((Base) simpleArray.get(position)).getId()).equals(id)) {
+            if (((simpleArray.get(position)).getId()).equals(id)) {
                 return position;
             }
             position++;
