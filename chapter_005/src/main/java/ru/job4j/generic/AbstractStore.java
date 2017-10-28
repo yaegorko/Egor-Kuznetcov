@@ -2,6 +2,10 @@ package ru.job4j.generic;
 
 public abstract class AbstractStore<T extends Base> implements Store<T> {
 
+    public SimpleArray getModels() {
+        return models;
+    }
+
     private SimpleArray models;
 
     AbstractStore(int size) {
@@ -15,7 +19,7 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
      */
     @Override
     public T add(T model) {
-        models.add(model);
+        this.models.add(model);
         return (T) models.get(checkPositionByID(models, model.getId()));
     }
 

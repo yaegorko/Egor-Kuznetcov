@@ -26,14 +26,14 @@ public class UserStoreTest {
         assertThat(userStore.delete("2"), is(false));
     }
 
-//    @Test
-//    public void whenAddUserAndUpdateHim() {
-//        User userOne = new User("1", "body1");
-//        userStore.add(userOne);
-//        assertThat(userStore.getUsers().get(0), is(userOne));
-//        User userOneUpdate = new User("1", "body11");
-//        userStore.update(userOneUpdate);
-//        assertThat(userStore.getUsers().get(0), is(userOneUpdate));
-//    }
+    @Test
+    public void whenAddUserAndUpdateHim() {
+        User userOne = new User("1", "body1");
+        userStore.add(userOne);
+        assertThat(userStore.getModels().get(0), is(userOne));
+        User userOneUpdate = new User("1", "body11");
+        userStore.update(userOneUpdate);
+        assertThat(userStore.getModels().get(0), is(userOneUpdate));
+    }
 
 }
