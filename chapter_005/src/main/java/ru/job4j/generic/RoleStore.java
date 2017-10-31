@@ -3,7 +3,7 @@ package ru.job4j.generic;
 /**
  * Хранилище ролей.
  */
-public class RoleStore extends AbstractStore {
+public class RoleStore extends AbstractStore<Role> {
 
     /**
      * Конструктор, устанавливаем размер хранилища roles при создании RoleStore.
