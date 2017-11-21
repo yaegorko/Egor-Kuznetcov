@@ -3,30 +3,44 @@ package ru.job4j.list;
 import java.util.Arrays;
 import java.util.Iterator;
 
+/**
+ * Динамический список на основе массива.
+ * @param <E> дженерик объектов.
+ */
 public class DynamicList<E> implements SimpleContainer<E> {
-
+    /**
+     * Размер массива по умолчанию.
+     */
     private static final int DEFAULT_CAPACITY = 10;
-
+    /**
+     * Массив - основа динамического списка.
+     */
     private Object[] container;
 
+    /**
+     * Геттр для теста метода адд, в логике не участвует.
+     * @return массив основу.
+     */
     public Object[] getContainer() {
         return container;
     }
 
+    /**
+     * Позиция в массиве.
+     */
     private int position = 0;
 
-    public int getPosition() {
-        return position;
-    }
-
+    /**
+     * Конструктор списка, размер по умолчанию.
+     */
     public DynamicList() {
         this.container = new Object[DEFAULT_CAPACITY];
     }
 
-    public DynamicList(int initialCapacity) {
-        this.container = new Object[initialCapacity];
-    }
-
+    /**
+     * Метод "добавить элемент".
+     * @param e объект из дженерика Е.
+     */
     @Override
     public void add(E e) {
         if (checkContainerSize()) {
@@ -37,37 +51,43 @@ public class DynamicList<E> implements SimpleContainer<E> {
         }
     }
 
+    /**
+     * Метод получить элемент по его индексу.
+     * @param index
+     * @return элемент.
+     */
     @Override
     public E get(int index) {
-        return (E) this.container[index];
+        if (index < this.position) {
+            return (E) this.container[index];
+        } else {
+            throw new IndexMoreThenNumberOfElementsException();
+        }
     }
 
+    /**
+     * Проверка размера массива при добавлении элемента.
+     * @return
+     */
     private boolean checkContainerSize() {
         return this.position < this.container.length;
     }
 
+    /**
+     * Увеличение размера при окончании свободных ячеек.
+     */
     private void increaseContainerSize() {
         this.container = Arrays.copyOf(this.container, this.container.length * 2);
     }
 
+    /**
+     * Итератор контейнера.
+     * @return итератор.
+     */
     @Override
     public Iterator<E> iterator() {
-        return new DynamicListIterator<E>(){
-
-        };
-    }
-
-    private class DynamicListIterator<E> implements Iterator<E> {
-
-        @Override
-        public boolean hasNext() {
-            int positionHasNext = getPosition();
-            return false;
-        }
-
-        @Override
-        public E next() {
-            return null;
-        }
+        return new DynamicListIterator<>(this.container);
     }
 }
+
+
