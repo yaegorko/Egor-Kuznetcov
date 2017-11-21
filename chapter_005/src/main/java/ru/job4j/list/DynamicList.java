@@ -15,6 +15,10 @@ public class DynamicList<E> implements SimpleContainer<E> {
 
     private int position = 0;
 
+    public int getPosition() {
+        return position;
+    }
+
     public DynamicList() {
         this.container = new Object[DEFAULT_CAPACITY];
     }
@@ -38,16 +42,32 @@ public class DynamicList<E> implements SimpleContainer<E> {
         return (E) this.container[index];
     }
 
-    @Override
-    public Iterator<E> iterator() {
-        return null;
-    }
-
     private boolean checkContainerSize() {
         return this.position < this.container.length;
     }
 
     private void increaseContainerSize() {
         this.container = Arrays.copyOf(this.container, this.container.length * 2);
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new DynamicListIterator<E>(){
+
+        };
+    }
+
+    private class DynamicListIterator<E> implements Iterator<E> {
+
+        @Override
+        public boolean hasNext() {
+            int positionHasNext = getPosition();
+            return false;
+        }
+
+        @Override
+        public E next() {
+            return null;
+        }
     }
 }
