@@ -1,11 +1,18 @@
 package ru.job4j.linkedlist;
 
+import ru.job4j.list.IndexNotInIndexRangeException;
+
 import java.util.Iterator;
 
 public class MyLinkedList<E> implements SimpleLinkedList<E> {
 
-    MyNode<E> startNode = new MyNode<E>(null, null, null);
-    MyNode<E> lastNode = new MyNode<E>(null, null, null);
+    private MyNode<E> startNode = new MyNode<E>(null, null, null);
+
+    public MyNode<E> getStartNode() {
+        return startNode;
+    }
+
+    private MyNode<E> lastNode = new MyNode<E>(null, null, null);
     private int numbersOfElements = 0;
 
     public MyLinkedList() {
@@ -25,13 +32,17 @@ public class MyLinkedList<E> implements SimpleLinkedList<E> {
     @Override
     public E get(int index) {
         if (index >= 0 && index < this.numbersOfElements) {
-
+            MyNode findNode = startNode;
+            for (int i = 0; i <= index; i++) {
+                findNode = findNode.getNextNode();
+            }
+            return (E) findNode.getValue();
         }
-        return null;
+        throw new IndexNotInIndexRangeException();
     }
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new MyLinkedListIterator(this);
     }
 }

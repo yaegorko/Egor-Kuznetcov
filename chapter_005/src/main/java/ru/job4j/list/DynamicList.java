@@ -58,10 +58,10 @@ public class DynamicList<E> implements SimpleContainer<E> {
      */
     @Override
     public E get(int index) {
-        if (index < this.position) {
+        if (index >= 0 && index < this.position) {
             return (E) this.container[index];
         } else {
-            throw new IndexMoreThenNumberOfElementsException();
+            throw new IndexNotInIndexRangeException();
         }
     }
 

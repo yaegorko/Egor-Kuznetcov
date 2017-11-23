@@ -47,7 +47,7 @@ public class DynamicListTest {
     /**
      * Тест метода get с индексом большим чем количество элементов в списке.
      */
-    @Test (expected = IndexMoreThenNumberOfElementsException.class)
+    @Test (expected = IndexNotInIndexRangeException.class)
     public void whenTryToGetElementWithIndexMoreThanNumberOfElementsInListThenGetIMTNOEE() {
         dynamicList.add(1);
         dynamicList.add("2");

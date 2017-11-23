@@ -12,10 +12,6 @@ public class MyNode<E> {
         return value;
     }
 
-    public MyNode<E> getPreviousNode() {
-        return previousNode;
-    }
-
     public MyNode<E> getNextNode() {
         return nextNode;
     }
