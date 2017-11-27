@@ -12,15 +12,19 @@ public class MyLinkedList<E> implements SimpleLinkedList<E> {
     /**
      * Стартовая нода.
      */
-    private MyNode<E> startNode = new MyNode<E>(null, null, null);
+    private MyNode<E> startNode = new MyNode<>(null, null, null);
     /**
      * Последняя нода.
      */
-    private MyNode<E> lastNode = new MyNode<E>(null, null, null);
+    private MyNode<E> lastNode = new MyNode<>(null, null, null);
     /**
      * Количество добавленных элементов в списке.
      */
     private int numbersOfElements = 0;
+
+    public int getNumbersOfElements() {
+        return numbersOfElements;
+    }
 
     /**
      * Геттр стартовой ноды.
@@ -53,20 +57,54 @@ public class MyLinkedList<E> implements SimpleLinkedList<E> {
     }
 
     /**
-     * Метод получающий элемент из списка по индексу.
+     * Метод получающий значение элемента из списка по индексу.
      * @param index индекс элемента.
      * @return значение дженерика.
      */
     @Override
     public E get(int index) {
+        return (E) getNode(index).getValue();
+    }
+
+    /**
+     * Метод получающий ноду по индексу.
+     * @param index индекс элемента.
+     * @return ноду
+     */
+    public MyNode getNode(int index) {
         if (index >= 0 && index < this.numbersOfElements) {
             MyNode findNode = startNode;
             for (int i = 0; i <= index; i++) {
                 findNode = findNode.getNextNode();
             }
-            return (E) findNode.getValue();
+            return findNode;
         }
         throw new IndexNotInIndexRangeException();
+    }
+
+    /**
+     * Метод удаляющий ноду из списка по индексу.
+     * @param index индекс.
+     */
+    public void remove(int index) {
+
+       MyNode prevNode;
+       MyNode nextNode;
+
+       if (index == 0) {
+           prevNode = this.startNode;
+       } else {
+           prevNode = getNode(index - 1);
+       }
+       if (index == numbersOfElements - 1) {
+           nextNode = this.lastNode;
+       } else {
+           nextNode = getNode(index + 1);
+       }
+
+       prevNode.setNextNode(nextNode);
+       nextNode.setPreviousNode(prevNode);
+       this.numbersOfElements--;
     }
 
     /**
