@@ -4,9 +4,9 @@ public class MyNode<E> {
 
     public E value;
 
-    public MyNode<E> previousNode;
+    private MyNode<E> previousNode;
 
-    public MyNode<E> nextNode;
+    private MyNode<E> nextNode;
 
     public E getValue() {
         return value;
