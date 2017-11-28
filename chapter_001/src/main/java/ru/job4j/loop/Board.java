@@ -16,6 +16,7 @@ public class Board {
     public String paint(int width, int height) {
         String completedString;
         StringBuilder stringBuilder = new StringBuilder();
+        final String line = System.getProperty("line.separator");
         for (int i = 1; i <= height; i++) {
             if (i % 2 != 0) {
                 for (int j = 1; j <= width; j++) {
@@ -25,7 +26,7 @@ public class Board {
                         stringBuilder.append("x");
                     }
                     if (j == width) {
-                        stringBuilder.append("\r\n");
+                        stringBuilder.append(line);
                     }
                 }
 
@@ -37,7 +38,7 @@ public class Board {
                         stringBuilder.append("x");
                     }
                     if (j == width) {
-                        stringBuilder.append("\r\n");
+                        stringBuilder.append(line);
                     }
                 }
             }
