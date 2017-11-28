@@ -14,7 +14,7 @@ public class Paint {
     public String piramid(int h) {
         String completedString;
         StringBuilder stringBuilder = new StringBuilder();
-
+        final String line = System.getProperty("line.separator");
         for (int i = h; i > 0; i--) { //цикл этажности пирамиды;
 
             for (int y = 0; y < i - 1; y++) { //цикл левых пробелов;
@@ -30,7 +30,7 @@ public class Paint {
             for (int y = 0; y < i - 1; y++) { // цикл правых пробелов;
                 stringBuilder.append(" ");
             }
-            stringBuilder.append("\r\n"); // переходим на новый этаж;
+            stringBuilder.append(line); // переходим на новый этаж;
         }
         stringBuilder.deleteCharAt(stringBuilder.length() - 1); // удаляем последний ненужный перевод строки;
         stringBuilder.deleteCharAt(stringBuilder.length() - 1); // или можно добавить в тестах еще 1 line.separator;
