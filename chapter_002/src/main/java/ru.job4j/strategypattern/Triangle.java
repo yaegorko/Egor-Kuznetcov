@@ -12,12 +12,15 @@ public class Triangle implements Shape {
      * @return строчку с треугольником.
      */
     public String pic() {
-
+        final String line = System.getProperty("line.separator");
         String compliteString;
         StringBuilder pic = new StringBuilder();
-        pic.append("   +\r\n");
-        pic.append("  + +\r\n");
-        pic.append(" +   +\r\n");
+        pic.append("   +");
+        pic.append(line);
+        pic.append("  + +");
+        pic.append(line);
+        pic.append(" +   +");
+        pic.append(line);
         pic.append("+++++++");
         compliteString = pic.toString();
         return compliteString;
