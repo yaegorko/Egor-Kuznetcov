@@ -22,7 +22,7 @@ public class PaintTest {
     public void whenPiramidWithHeightTwoThenStringWithTwoRows() {
         Paint paint = new Paint();
         String result = paint.piramid(2);
-        String expected = String.format(" ^ %s^^", line);
+        String expected = String.format(" ^ %s^^^%s", line, line);
         assertThat(result, is(expected));
     }
 
@@ -35,7 +35,7 @@ public class PaintTest {
         //напишите здесь тест, проверяющий формирование пирамиды для высоты 3.
         Paint paint = new Paint();
         String result = paint.piramid(3);
-        String expected = String.format("  ^  %s ^^^ %s^^^^", line, line);
+        String expected = String.format("  ^  %s ^^^ %s^^^^^%s", line, line, line);
         assertThat(result, is(expected));
     }
 }

@@ -24,7 +24,7 @@ public class Paint {
                 if (j == 0) {
                     stringBuilder.append("^"); // на вершине или первым добавляем один кирпич ^;
                 } else {
-                    stringBuilder.append("^^"); // на этажах добавляем два  кирпича ^;
+                    stringBuilder.append("^^"); // на этажах добавляем два кирпича ^;
                 }
             }
             for (int y = 0; y < i - 1; y++) { // цикл правых пробелов;
@@ -32,8 +32,8 @@ public class Paint {
             }
             stringBuilder.append(line); // переходим на новый этаж;
         }
-        stringBuilder.deleteCharAt(stringBuilder.length() - 1); // удаляем последний ненужный перевод строки;
-        stringBuilder.deleteCharAt(stringBuilder.length() - 1); // или можно добавить в тестах еще 1 line.separator;
+//        stringBuilder.deleteCharAt(stringBuilder.length() - 1); // удаляем последний ненужный перевод строки;
+//        stringBuilder.deleteCharAt(stringBuilder.length() - 1); // или можно добавить в тестах еще 1 line.separator;
         completedString = stringBuilder.toString();
         return completedString;
     }
