@@ -35,6 +35,8 @@ public class BankingTest extends OutputTest {
      */
     private User userTwo = new User("Two", "1201456710");
 
+    final String line = System.getProperty("line.separator");
+
     /**
      * Тест метода checkUser.
      * проверяем наличие пользователей c одинаковыми паспортами.
@@ -44,7 +46,7 @@ public class BankingTest extends OutputTest {
         User userOneInMap = new User("One1", "1201456789");
         banking.addUser(userOne);
         banking.addUser(userOneInMap);
-        String expected = String.format("Пользователь с паспортом %s уже зарегестрирован в системе.\r\n", userOne.getPassport());
+        String expected = String.format("Пользователь с паспортом %s уже зарегестрирован в системе.%s", userOne.getPassport(), line);
         Assert.assertEquals(expected, getOutput().toString());
         assertThat(banking.checkUser(userOne), is(true));
         assertThat(banking.checkUser(userOneInMap), is(false));
@@ -60,7 +62,7 @@ public class BankingTest extends OutputTest {
         banking.addUser(userTwo);
         banking.addAccountToUser(userOne, accountOne);
         banking.addAccountToUser(userTwo, accountOne);
-        String expected = String.format("%s счет уже используется в системе!\r\n", accountOne.getRequisites());
+        String expected = String.format("%s счет уже используется в системе!%s", accountOne.getRequisites(), line);
         Assert.assertEquals(expected, getOutput().toString());
     }
 
@@ -86,7 +88,7 @@ public class BankingTest extends OutputTest {
         assertThat(banking.checkUser(userOne), is(true));
         banking.deleteUser(userOne);
         banking.deleteUser(userOne);
-        Assert.assertEquals("Пользователя с такими данными нет в системе!\r\n", getOutput().toString());
+        Assert.assertEquals("Пользователя с такими данными нет в системе!" + line, getOutput().toString());
         assertThat(banking.checkUser(userOne), is(false));
         assertThat(banking.checkUser(userTwo), is(true));
     }
@@ -118,7 +120,7 @@ public class BankingTest extends OutputTest {
         List list = (List) map.get(userOne);
         assertThat(list.size(), is(2));
         banking.deleteAccountFromUser(userOne, accountOne);
-        String expected = String.format("У пользователя нет счета %s\r\n", accountOne.getRequisites());
+        String expected = String.format("У пользователя нет счета %s%s", accountOne.getRequisites(), line);
         Assert.assertEquals(expected, getOutput().toString());
         banking.deleteAccountFromUser(userOne, accountTwo);
         map = banking.getUsersBankAccounts();
@@ -155,9 +157,9 @@ public class BankingTest extends OutputTest {
         assertThat(accountOne.getValue(), is(5000000d));
         assertThat(accountTwo.getValue(), is(20000000d));
         banking.transferMoney(userOne, accountOne, userTwo, accountTwo, 20000000);
-        String expected = String.format("На счет %s переведено 2.0E7\r\n"
-                                        + "У пользователя %s на счету %s недостаточно средств\r\n",
-                                        accountTwo.getRequisites(), userOne.getName(), accountOne.getRequisites());
+        String expected = String.format("На счет %s переведено 2.0E7%s"
+                                        + "У пользователя %s на счету %s недостаточно средств%s",
+                                        accountTwo.getRequisites(), line, userOne.getName(), accountOne.getRequisites(), line);
         Assert.assertEquals(expected, getOutput().toString());
     }
 }
