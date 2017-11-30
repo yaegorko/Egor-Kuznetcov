@@ -18,7 +18,7 @@ public class MySetTest {
         mySet.add(myNode);
         mySet.add(myNode1);
         Object[] setTest = mySet.getArrayForSet();
-        assertThat(setTest.length, is(2));
+        assertThat(setTest.length, is(10));
         assertThat(setTest[0], is(1));
         assertThat(setTest[1], is(myNode));
 

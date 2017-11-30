@@ -2,10 +2,13 @@ package ru.job4j.set;
 
 import java.util.Iterator;
 
-
+/**
+ *
+ * @param <T>
+ */
 public class MySet<T> implements SimpleSet<T> {
 
-    private Object[] arrayForSet = new Object[2];
+    private Object[] arrayForSet = new Object[10];
 
     public Object[] getArrayForSet() {
         return arrayForSet;
@@ -25,6 +28,6 @@ public class MySet<T> implements SimpleSet<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new MySetIterator();
+        return new MySetIterator(this.arrayForSet);
     }
 }
