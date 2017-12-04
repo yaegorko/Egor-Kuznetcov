@@ -2,9 +2,9 @@ package ru.job4j.set;
 
 import org.junit.Test;
 import ru.job4j.linkedlist.MyNode;
-import ru.job4j.list.NoMoreElementsInContainerException;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -45,7 +45,7 @@ public class MySetTest {
     /**
      * Тест итератора.
      */
-    @Test (expected = NoMoreElementsInContainerException.class)
+    @Test (expected = NoSuchElementException.class)
     public void testIteratorMethod() {
         MySet mySet = new MySet();
         mySet.add(1);

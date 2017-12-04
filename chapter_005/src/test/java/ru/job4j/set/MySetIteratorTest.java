@@ -3,6 +3,8 @@ package ru.job4j.set;
 import org.junit.Test;
 import ru.job4j.list.NoMoreElementsInContainerException;
 
+import java.util.NoSuchElementException;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -14,7 +16,7 @@ public class MySetIteratorTest {
     /**
      * Тест который последовательно вызывает hasNext и next .
      */
-    @Test(expected = NoMoreElementsInContainerException.class)
+    @Test(expected = NoSuchElementException.class)
     public void shouldReturnEvenNumbersSequentially() {
         MySetIterator mySetIterator = new MySetIterator(new Object[]{1, "2", '3'});
         assertThat(mySetIterator.hasNext(), is(true));

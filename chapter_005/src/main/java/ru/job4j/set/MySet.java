@@ -23,24 +23,35 @@ public class MySet<T> implements SimpleSet<T> {
      */
     @Override
     public void add(T t) {
+        if (hasDuplicate(t)) {
+            return;
+        }
+        if (!isContainerFilled()) {
+            increaseContainerSize();
+        }
+        this.arrayForSet[this.numbersOfElements++] = t;
+    }
+
+    /**
+     * Метод проверяющий вхождение элемента в множество.
+     * при использовании MySet требуется переопределение equals.
+     * @param t объекты из дженерика.
+     * @return true если объект уже есть в множестве.
+     */
+    private boolean hasDuplicate(T t) {
         for (int i = 0; i < numbersOfElements; i++) {
             if (t.equals(arrayForSet[i])) {
-                return;
+                return true;
             }
         }
-        if (checkContainerSize()) {
-            this.arrayForSet[this.numbersOfElements++] = t;
-        } else {
-            increaseContainerSize();
-            this.arrayForSet[this.numbersOfElements++] = t;
-        }
+        return false;
     }
 
     /**
      * Проверка размера массива при добавлении элемента.
      * @return true если есть место.
      */
-    private boolean checkContainerSize() {
+    private boolean isContainerFilled() {
         return this.numbersOfElements < this.arrayForSet.length;
     }
 

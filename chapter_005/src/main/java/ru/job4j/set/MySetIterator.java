@@ -3,6 +3,7 @@ package ru.job4j.set;
 import ru.job4j.list.NoMoreElementsInContainerException;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Итератор для MySetIterator.
@@ -55,7 +56,7 @@ public class MySetIterator<T> implements Iterator<T> {
         if (hasNext()) {
             return (T) arrayForSet[index++];
         } else {
-            throw new NoMoreElementsInContainerException();
+            throw new NoSuchElementException();
         }
     }
 }
