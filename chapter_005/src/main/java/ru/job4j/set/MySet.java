@@ -18,12 +18,12 @@ public class MySet<T> implements SimpleSet<T> {
     private int numbersOfElements = 0;
 
     /**
-     * Добавляем в Set.
+     * Добавляем в Set. Если уже имеется в множестве, то не добавляем.
      * @param t объекты из дженерика.
      */
     @Override
     public void add(T t) {
-        for (int i = 0; i < numbersOfElements ; i++) {
+        for (int i = 0; i < numbersOfElements; i++) {
             if (t.equals(arrayForSet[i])) {
                 return;
             }
@@ -38,7 +38,7 @@ public class MySet<T> implements SimpleSet<T> {
 
     /**
      * Проверка размера массива при добавлении элемента.
-     * @return
+     * @return true если есть место.
      */
     private boolean checkContainerSize() {
         return this.numbersOfElements < this.arrayForSet.length;
@@ -51,7 +51,10 @@ public class MySet<T> implements SimpleSet<T> {
         this.arrayForSet = Arrays.copyOf(this.arrayForSet, this.arrayForSet.length * 2);
     }
 
-
+    /**
+     * Итератор контейнера.
+     * @return итератор.
+     */
     @Override
     public Iterator<T> iterator() {
         return new MySetIterator(this.arrayForSet);
