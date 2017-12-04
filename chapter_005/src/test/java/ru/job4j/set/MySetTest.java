@@ -31,6 +31,21 @@ public class MySetTest {
     }
 
     /**
+     * Тест увеличения размера контейнера.
+     */
+    @Test
+    public void testIncreaseSize() {
+        MySet mySet = new MySet();
+        for (int i = 0; i < 15; i++) {
+            mySet.add(i);
+            if (i == 10){
+                assertThat(mySet);
+            }
+        }
+        assertThat(mySet.getArrayForSet().length, is(20));
+    }
+
+    /**
      * Тест итератора.
      */
     @Test (expected = NoMoreElementsInContainerException.class)
