@@ -16,12 +16,14 @@ public class MyLinkedSet<T> implements SimpleSet<T> {
     private MyNode<T> lastNode = new MyNode(null, null, null);
     private MyNode<T> currentNode;
 
+//    1
 //    MyLinkedSet(){
 //        this.startNode.setNextNode(this.lastNode);
 //        this.lastNode.setPreviousNode(this.startNode);
 //        currentNode = startNode;
 //    }
-
+//
+//    2
     {
         this.startNode.setNextNode(this.lastNode);
         this.lastNode.setPreviousNode(this.startNode);
