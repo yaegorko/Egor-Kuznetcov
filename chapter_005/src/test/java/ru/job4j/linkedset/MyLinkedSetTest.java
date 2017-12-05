@@ -8,23 +8,32 @@ import java.util.NoSuchElementException;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
+/**
+ * Класс тестов MyLinkedSet.
+ */
 public class MyLinkedSetTest {
-
+    /**
+     * Множество.
+     */
     MyLinkedSet myLinkedSet = new MyLinkedSet();
 
+    /**
+     * Добавляем разные элементы и итерируем их.
+     */
     @Test (expected = NoSuchElementException.class)
-    public void test1() {
+    public void whenAddInLinkedSetAndIteration() {
         this.myLinkedSet.add(1);
         this.myLinkedSet.add("2");
         this.myLinkedSet.add('@');
-        assertThat(myLinkedSet.iterator().hasNext(), is(true));
-        assertThat(myLinkedSet.iterator().next(), is(1));
-        assertThat(myLinkedSet.iterator().hasNext(), is(true));
-        assertThat(myLinkedSet.iterator().next(), is("2"));
-        assertThat(myLinkedSet.iterator().hasNext(), is(true));
-        assertThat(myLinkedSet.iterator().next(), is('@'));
-        assertThat(myLinkedSet.iterator().hasNext(), is(false));
-        myLinkedSet.iterator().next();
+        Iterator iterator = myLinkedSet.iterator();
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is(1));
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is("2"));
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is('@'));
+        assertThat(iterator.hasNext(), is(false));
+        iterator.next();
     }
 
 }

@@ -28,6 +28,10 @@ public class MyLinkedSet<T> implements SimpleSet<T> {
         currentNode = startNode;
     }
 
+    /**
+     * Добавляем элемент в список.
+     * @param t объект из дженерика.
+     */
     @Override
     public void add(T t) {
         if (hasDuplicate(t)) {
@@ -39,6 +43,12 @@ public class MyLinkedSet<T> implements SimpleSet<T> {
         addNode.setNextNode(lastNode);
     }
 
+    /**
+     * Пролверяем уникальность объекта в множестве.
+     * Требует переопределениия equals.
+     * @param t объект из дженерика.
+     * @return true если объект уже есть в множестве.
+     */
     private boolean hasDuplicate(T t) {
         MyNode testNode = this.startNode;
         while (testNode.getNextNode() != null) {
@@ -50,13 +60,24 @@ public class MyLinkedSet<T> implements SimpleSet<T> {
         return false;
     }
 
+    /**
+     * Итератор.
+     * @return итератор множества.
+     */
     @Override
     public Iterator<T> iterator() {
         return new  MyLinkedSetIterator();
     }
 
+    /**
+     * Класс итератора.
+     * @param <T> объект из дженерика.
+     */
     private class MyLinkedSetIterator<T> implements Iterator<T> {
-
+        /**
+         * Проверяем есть ли следующий элемент.
+         * @return true если есть.
+         */
         @Override
         public boolean hasNext() {
             if (currentNode.getNextNode().getNextNode() != null) {
@@ -65,6 +86,10 @@ public class MyLinkedSet<T> implements SimpleSet<T> {
             return false;
         }
 
+        /**
+         * Получаем значение следующего элемента.
+         * @return значение следующего элемента
+         */
         @Override
         public T next() {
             if (hasNext()) {
