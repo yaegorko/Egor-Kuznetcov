@@ -5,10 +5,18 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
+/**
+ * Класс тестов MyHashSet
+ */
 public class MyHashSetTest {
-
+    /**
+     * Хэш множество.
+     */
     MyHashSet myHashSet = new MyHashSet();
 
+    /**
+     * Тест add.
+     */
     @Test
     public void whenAddElementsInHashSetThanCheck() {
         myHashSet.add(2);
@@ -18,6 +26,9 @@ public class MyHashSetTest {
         assertThat(expect["YYY".hashCode()], is("YYY"));
     }
 
+    /**
+     * Тест contains. Хэшсет содержит элементы.
+     */
     @Test
     public void whenHashSetContainsAddedElements() {
         myHashSet.add(2);
@@ -26,6 +37,9 @@ public class MyHashSetTest {
         assertThat(myHashSet.contains("YYY"), is(true));
     }
 
+    /**
+     * Тест contains. Хэшсет не содержит элементы.
+     */
     @Test
     public void whenHashSetDosNotContainsAddedElements() {
         myHashSet.add(2);
@@ -36,6 +50,9 @@ public class MyHashSetTest {
         assertThat(myHashSet.contains(1), is(false));
     }
 
+    /**
+     * Тест remove.
+     */
     @Test
     public void whenRemoveElementsFromHashSet() {
         myHashSet.add(2);
