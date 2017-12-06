@@ -39,7 +39,7 @@ public class MyHashSet<T> {
 
     public boolean remove(T t) {
         int index = calculateHash(t);
-        if (isInRange(index)) {
+        if (isInRange(index) && arrayForHashSet[index] != null) {
             arrayForHashSet[index] = null;
             return true;
         } else {

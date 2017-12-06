@@ -46,5 +46,7 @@ public class MyHashSetTest {
         assertThat(myHashSet.remove("YYY"), is(true));
         assertThat(myHashSet.contains(2), is(false));
         assertThat(myHashSet.contains("YYY"), is(false));
+        assertThat(myHashSet.remove(2), is(false));
+        assertThat(myHashSet.remove("YYY"), is(false));
     }
 }
