@@ -1,5 +1,6 @@
 package ru.job4j.listspeed;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -22,30 +23,32 @@ public class SpeedTest {
      */
     private final int amount = 50000;
 
-//    /** Мешает при сборке из-за долгого тестирования.
-//     * Тестируем добавление эл-тов в коллекции.
-//     * При стартовом размере коллекции 1000000 при добавлении более 280000 эл-тов тест проваливается.
-//     * Т.е. LinkedList быстрее до 280000.
-//     */
-//    @Test
-//    public void whenAddNewElementsToCollectionsThanCompareTime() {
-//
-//        test.generateLists(collectionSize);
-//        long arrT = test.add(test.getArrayList(), amount);
-//        System.out.println(String.format("Add to ArrayList size %s, %s new elements in %s ", collectionSize, amount, arrT));
-//        long linT = test.add(test.getLinkedList(), amount);
-//        System.out.println(String.format("Add to LinkedList size %s, %s new elements in %s ", collectionSize, amount, linT));
-//        long treT = test.add(test.getTreeSet(), amount);
-//        System.out.println(String.format("Add to TreeSet size %s, %s new elements in %s ", collectionSize, amount, treT));
-//        assertThat(linT < arrT, is(false));
-//        assertThat(arrT < treT, is(false));
-//
-//    }
+    /** Мешает при сборке из-за долгого тестирования.
+     * Тестируем добавление эл-тов в коллекции.
+     * При стартовом размере коллекции 1000000 при добавлении более 280000 эл-тов тест проваливается.
+     * Т.е. LinkedList быстрее до 280000.
+     */
+    @Test
+    @Ignore
+    public void whenAddNewElementsToCollectionsThanCompareTime() {
+
+        test.generateLists(collectionSize);
+        long arrT = test.add(test.getArrayList(), amount);
+        System.out.println(String.format("Add to ArrayList size %s, %s new elements in %s ", collectionSize, amount, arrT));
+        long linT = test.add(test.getLinkedList(), amount);
+        System.out.println(String.format("Add to LinkedList size %s, %s new elements in %s ", collectionSize, amount, linT));
+        long treT = test.add(test.getTreeSet(), amount);
+        System.out.println(String.format("Add to TreeSet size %s, %s new elements in %s ", collectionSize, amount, treT));
+        assertThat(linT < arrT, is(false));
+        assertThat(arrT < treT, is(false));
+
+    }
 
     /**
      * Тестируем удаление.
      */
     @Test
+    @Ignore
     public void whenDeleteNElementsFromCollectionsThanCompareTime() {
 
         test.generateLists(collectionSize);
