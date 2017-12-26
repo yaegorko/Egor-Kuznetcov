@@ -14,6 +14,15 @@ public class MyHashSetTest {
      */
     MyHashSet myHashSet = new MyHashSet();
 
+
+    @Test
+    public void whenAddElementsInHashSetThanCheck1() {
+        myHashSet.add(2);
+        myHashSet.add("YYY");
+        myHashSet.add("YYYzzzzYYY");
+        myHashSet.add("YYYss");
+    }
+
     /**
      * Тест add.
      */

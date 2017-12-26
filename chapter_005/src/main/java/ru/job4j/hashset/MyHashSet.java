@@ -10,7 +10,7 @@ public class MyHashSet<T> {
     /**
      * массив для множества.
      */
-    private Object[] arrayForHashSet = new Object[10];
+    private Object[] arrayForHashSet = new Object[128];
 
     /**
      * Геттр для теста.
@@ -26,7 +26,7 @@ public class MyHashSet<T> {
      * @return хэшкод.
      */
     private int calculateHash(T t) {
-        int myHash = t.hashCode();
+        int myHash = t.hashCode() & (arrayForHashSet.length - 1);
         return myHash;
     }
 
@@ -41,7 +41,7 @@ public class MyHashSet<T> {
             return false;
         }
         if (!isInRange(index)) {
-            increaseLength(index);
+            increaseLength(arrayForHashSet.length * 2);
         }
            arrayForHashSet[index] = t;
            return true;
