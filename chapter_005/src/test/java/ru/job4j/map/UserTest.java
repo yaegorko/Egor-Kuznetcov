@@ -17,8 +17,8 @@ public class UserTest {
 
     @Test
     public void whenAddTwoUsersToTheMapWithEquals() {
-        map.put(user1, "Girl");
-        map.put(user2, "Boy");
+        map.put(user1, "Manager");
+        map.put(user2, "Worker");
         System.out.println(map);
     }
 }
