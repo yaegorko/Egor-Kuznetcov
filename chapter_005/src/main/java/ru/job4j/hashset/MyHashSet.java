@@ -12,6 +12,8 @@ public class MyHashSet<T> {
      */
     private Object[] arrayForHashSet = new Object[4];
 
+    private int addedElementsCounter = 0;
+
     /**
      * Геттр для теста.
      * @return массив.
@@ -45,6 +47,7 @@ public class MyHashSet<T> {
         }
         int index = calculateHash(t, arrayForHashSet);
         arrayForHashSet[index] = t;
+        addedElementsCounter++;
         return true;
     }
 
@@ -53,12 +56,10 @@ public class MyHashSet<T> {
      * @return true если массив еще не полон.
      */
     private boolean arrayIsFull() {
-        for (Object obj: arrayForHashSet) {
-            if (obj == null) {
-                return false;
-            }
-        }
-        return true;
+       if (addedElementsCounter < arrayForHashSet.length) {
+           return false;
+       }
+       return true;
     }
 
     /**
@@ -72,7 +73,7 @@ public class MyHashSet<T> {
                 newArrayForHashSet[calculateHash((T) obj, newArrayForHashSet)] = obj;
             }
         }
-        arrayForHashSet = Arrays.copyOf(newArrayForHashSet, newArrayForHashSet.length);
+        arrayForHashSet = newArrayForHashSet;
     }
 
     /**
