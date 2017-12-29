@@ -1,7 +1,5 @@
 package ru.job4j.hashset;
 
-import java.util.Arrays;
-
 /**
  * Класс множества на основе хэш таблицы.
  * @param <T> объекты из дженерика.
