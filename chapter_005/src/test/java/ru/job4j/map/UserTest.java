@@ -6,6 +6,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class UserTest {
@@ -17,6 +18,9 @@ public class UserTest {
 
     @Test
     public void whenAddTwoUsersToTheMapWithEquals() {
+        int hash1 = user1.hashCode();
+        int hash2 = user2.hashCode();
+        assertThat(hash1 == hash2, is(true));
         map.put(user1, "Manager");
         map.put(user2, "Worker");
         System.out.println(map);
