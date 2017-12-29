@@ -36,16 +36,16 @@ public class MyHashSet<T> {
      * @return true если объект добавлен.
      */
     public boolean add(T t) {
-        int index = calculateHash(t, arrayForHashSet);
+
         if (contains(t)) {
             return false;
         }
         if (arrayIsFull()) {
             increaseLength();
-            index = calculateHash(t, arrayForHashSet);
         }
-           arrayForHashSet[index] = t;
-           return true;
+        int index = calculateHash(t, arrayForHashSet);
+        arrayForHashSet[index] = t;
+        return true;
     }
 
     /**
