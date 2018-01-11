@@ -1,4 +1,4 @@
-package ru.job4j.hashset;
+ package ru.job4j.hashset;
 
 /**
  * Класс множества на основе хэш таблицы.
