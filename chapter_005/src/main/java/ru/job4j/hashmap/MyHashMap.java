@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
  * @param <K> дженерик для ключей.
  * @param <V> Дженерик значений.
  */
-public class MyHashMap<K, V> implements Iterable<K>{
+public class MyHashMap<K, V> implements Iterable<K> {
     /**
      * Класс описывающий элементы для хранения.
      * @param <K> ключ.
