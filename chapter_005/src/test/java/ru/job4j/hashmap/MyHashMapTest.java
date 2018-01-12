@@ -29,4 +29,20 @@ public class MyHashMapTest {
         assertThat(entry2.getValue(), is("Dasha"));
     }
 
+    @Test
+    public void whenAddMoreElementsWhenContainerCanHoldThenIncreaseLength() {
+        myHashMap.insert(1, "Masha");
+        myHashMap.insert(2, "Dasha");
+        myHashMap.insert(3, "Misha");
+        myHashMap.insert(4, "Grisha");
+
+        Object[] testArray = myHashMap.getArrayForHashMap();;
+
+        assertThat(testArray.length, is(4));
+
+        myHashMap.insert(5, "Glasha");
+
+        testArray = myHashMap.getArrayForHashMap();
+        assertThat(testArray.length, is(8));
+    }
 }

@@ -80,29 +80,26 @@ public class MyHashMap<K, V> {
         }
         return false;
     }
-    /**
-     * Проверяем содержится или нет в хранилище элемент с таким же ключом как у наш.
-     * @param key ключ
-     * @return true если есть такой же ключ.
-     */
-    private boolean isKeyContains(K key) {
-        for (Entry entry: arrayForHashMap) {
-            if (key == entry.getKey() || key.equals(entry.getKey())) {
-                return true;
-            }
-        }
-        return false;
-    }
+//    /**
+//     * Проверяем содержится или нет в хранилище элемент с таким же ключом как у наш.
+//     * @param key ключ
+//     * @return true если есть такой же ключ.
+//     */
+//    private boolean isKeyContains(K key) {
+//        for (Entry entry: arrayForHashMap) {
+//            if (key == entry.getKey() || key.equals(entry.getKey())) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     /**
      * Проверка заполнения массива.
      * @return true если массив еще не полон.
      */
     private boolean arrayIsFull() {
-        if (addedElementsCounter < arrayForHashMap.length) {
-            return false;
-        }
-        return true;
+        return addedElementsCounter >= arrayForHashMap.length;
     }
 
     /**
