@@ -2,6 +2,8 @@ package ru.job4j.hashmap;
 
 import org.junit.Test;
 
+import java.util.HashMap;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -44,5 +46,20 @@ public class MyHashMapTest {
 
         testArray = myHashMap.getArrayForHashMap();
         assertThat(testArray.length, is(8));
+    }
+
+    @Test
+    public void whenTryGetElementFromMyHashMapAndGetIt() {
+        myHashMap.insert(1, "Masha");
+        myHashMap.insert(2, "Dasha");
+        assertThat(myHashMap.get(1), is("Masha"));
+        assertThat(myHashMap.get(2), is("Dasha"));
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void whenTryGetElementFromMyHashMapButElementNotInMapThenGetNull() {
+        myHashMap.insert(1, "Masha");
+        myHashMap.insert(2, "Dasha");
+        assertThat(myHashMap.get(3), is(5));
     }
 }

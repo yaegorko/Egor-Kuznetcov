@@ -137,9 +137,15 @@ public class MyHashMap<K, V> {
         return true;
     }
 
-//  public V get(K key) {
-//
-//    }
+    public V get(K key) {
+        int hash = calculateHash(key);
+        for (Entry entry: arrayForHashMap) {
+            if (entry != null && hash == entry.getHash() && key == entry.getKey()) {
+                return  (V) entry.getValue();
+            }
+        }
+        throw new RuntimeException();
+    }
 
     public boolean delete(K key) {
 
