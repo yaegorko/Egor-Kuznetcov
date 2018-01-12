@@ -94,11 +94,15 @@ public class MyHashMapTest {
 
             @Override
             public boolean equals(Object o) {
-                if (this == o) return true;
-                if (o == null || getClass() != o.getClass()) return false;
+                if (this == o) {
+                    return true;
+                }
+                if (o == null || getClass() != o.getClass()) {
+                    return false;
+                }
                 Keys keys = (Keys) o;
-                return Objects.equals(name, keys.name) &&
-                        Objects.equals(surname, keys.surname);
+                return Objects.equals(name, keys.name)
+                        && Objects.equals(surname, keys.surname);
             }
 
             @Override
