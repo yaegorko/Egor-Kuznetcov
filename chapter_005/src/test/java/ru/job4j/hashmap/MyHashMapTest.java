@@ -68,4 +68,19 @@ public class MyHashMapTest {
         myHashMap.insert(2, "Dasha");
         assertThat(myHashMap.get(3), is(5));
     }
+
+    @Test
+    public void whenTryDeleteElementFromMyHashMapAndThanGetTrue() {
+        myHashMap.insert(1, "Masha");
+        myHashMap.insert(2, "Dasha");
+        assertThat(myHashMap.delete(1), is(true));
+    }
+
+    @Test
+    public void whenTryDeleteElementFromMyHashMapButCantThanGetFalse() {
+        myHashMap.insert(1, "Masha");
+        myHashMap.insert(2, "Dasha");
+        assertThat(myHashMap.delete(1), is(true));
+        assertThat(myHashMap.delete(1), is(false));
+    }
 }

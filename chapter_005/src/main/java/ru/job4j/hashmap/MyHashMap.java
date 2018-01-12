@@ -140,7 +140,7 @@ public class MyHashMap<K, V> {
     public V get(K key) {
         int hash = calculateHash(key);
         for (Entry entry: arrayForHashMap) {
-            if (entry != null && hash == entry.getHash() && key == entry.getKey()) {
+            if (entry != null && hash == entry.getHash() && (key == entry.getKey() || key.equals(entry.getKey()))) {
                 return  (V) entry.getValue();
             }
         }
@@ -150,8 +150,8 @@ public class MyHashMap<K, V> {
     public boolean delete(K key) {
         int hash = calculateHash(key);
         for (Entry entry : arrayForHashMap) {
-            if (entry != null && hash == entry.getHash() && key == entry.getKey()) {
-                entry = null;
+            if (entry != null && hash == entry.getHash() && (key == entry.getKey() || key.equals(entry.getKey()))) {
+                arrayForHashMap[calculatePosition(key, arrayForHashMap)] = null;
                 addedElementsCounter--;
                 return true;
             }
