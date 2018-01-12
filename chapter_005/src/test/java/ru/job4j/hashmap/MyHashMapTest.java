@@ -38,7 +38,7 @@ public class MyHashMapTest {
         myHashMap.insert(3, "Misha");
         myHashMap.insert(4, "Grisha");
 
-        Object[] testArray = myHashMap.getArrayForHashMap();;
+        Object[] testArray = myHashMap.getArrayForHashMap();
 
         assertThat(testArray.length, is(4));
 

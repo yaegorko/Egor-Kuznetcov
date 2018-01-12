@@ -147,10 +147,10 @@ public class MyHashMap<K, V> {
         throw new RuntimeException();
     }
 
-    public boolean delete(K key) {
-
-
-        addedElementsCounter--;
-        return true;
-    }
+//    public boolean delete(K key) {
+//
+//
+//        addedElementsCounter--;
+//        return true;
+//    }
 }
