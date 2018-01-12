@@ -2,7 +2,7 @@ package ru.job4j.hashmap;
 
 import org.junit.Test;
 
-import java.util.HashMap;
+import java.util.Objects;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -83,4 +83,43 @@ public class MyHashMapTest {
         assertThat(myHashMap.delete(1), is(true));
         assertThat(myHashMap.delete(1), is(false));
     }
+
+    @Test
+    public void whenTryGetAndDeleteElementFromMyHashMapKeyIsNotPrimitive() {
+
+        class Keys {
+
+            String name;
+            String surname;
+
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+                Keys keys = (Keys) o;
+                return Objects.equals(name, keys.name) &&
+                        Objects.equals(surname, keys.surname);
+            }
+
+            @Override
+            public int hashCode() {
+                return Objects.hash(name, surname);
+            }
+
+            public Keys(String name, String surname) {
+                this.name = name;
+                this.surname = surname;
+            }
+        }
+        Keys masha = new Keys("Masha", "Ivanova");
+        Keys dasha = new Keys("Dasha", "Sidorova");
+        myHashMap.insert(masha, 25);
+        myHashMap.insert(dasha, 26);
+        assertThat(myHashMap.get(masha), is(25));
+        assertThat(myHashMap.get(dasha), is(26));
+        assertThat(myHashMap.delete(masha), is(true));
+        assertThat(myHashMap.delete(masha), is(false));
+
+    }
+
 }
