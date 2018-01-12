@@ -32,6 +32,12 @@ public class MyHashMapTest {
     }
 
     @Test
+    public void whenAddElementWithSameKeyThanGetFalse() {
+        assertThat(myHashMap.insert(1, "Masha"), is(true));
+        assertThat(myHashMap.insert(1, "Misha"), is(false));
+    }
+
+    @Test
     public void whenAddMoreElementsWhenContainerCanHoldThenIncreaseLength() {
         myHashMap.insert(1, "Masha");
         myHashMap.insert(2, "Dasha");
