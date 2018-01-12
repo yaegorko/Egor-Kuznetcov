@@ -147,10 +147,15 @@ public class MyHashMap<K, V> {
         throw new RuntimeException();
     }
 
-//    public boolean delete(K key) {
-//
-//
-//        addedElementsCounter--;
-//        return true;
-//    }
+    public boolean delete(K key) {
+        int hash = calculateHash(key);
+        for (Entry entry : arrayForHashMap) {
+            if (entry != null && hash == entry.getHash() && key == entry.getKey()) {
+                entry = null;
+                addedElementsCounter--;
+                return true;
+            }
+        }
+        return false;
+    }
 }
