@@ -1,11 +1,14 @@
 package ru.job4j.hashmap;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * Класс Мар.
  * @param <K> дженерик для ключей.
  * @param <V> Дженерик значений.
  */
-public class MyHashMap<K, V> {
+public class MyHashMap<K, V> implements Iterable<K>{
     /**
      * Класс описывающий элементы для хранения.
      * @param <K> ключ.
@@ -80,19 +83,6 @@ public class MyHashMap<K, V> {
         }
         return false;
     }
-//    /**
-//     * Проверяем содержится или нет в хранилище элемент с таким же ключом как у наш.
-//     * @param key ключ
-//     * @return true если есть такой же ключ.
-//     */
-//    private boolean isKeyContains(K key) {
-//        for (Entry entry: arrayForHashMap) {
-//            if (key == entry.getKey() || key.equals(entry.getKey())) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 
     /**
      * Проверка заполнения массива.
@@ -137,6 +127,11 @@ public class MyHashMap<K, V> {
         return true;
     }
 
+    /**
+     * Метод возвращающий значение по ключу
+     * @param key ключ.
+     * @return значение если такой ключ есть в хранилище, RuntimeException если ключа нет.
+     */
     public V get(K key) {
         int hash = calculateHash(key);
         for (Entry entry: arrayForHashMap) {
@@ -147,6 +142,11 @@ public class MyHashMap<K, V> {
         throw new RuntimeException();
     }
 
+    /**
+     * Метод по ключу удаляющий элемент из хранилища .
+     * @param key ключ
+     * @return true если элемент удален, false если элемента с таким ключом нет.
+     */
     public boolean delete(K key) {
         int hash = calculateHash(key);
         for (Entry entry : arrayForHashMap) {
@@ -158,4 +158,62 @@ public class MyHashMap<K, V> {
         }
         return false;
     }
+
+    /**
+     * Итератор контейнера.
+     * @return итератор.
+     */
+    @Override
+    public Iterator<K> iterator() {
+        return new MyHashMapIterator();
+    }
+
+    /**
+     * Класс итератора для MyHashMap.
+     * @param <K> хз.
+     */
+    private class MyHashMapIterator<K> implements Iterator<K> {
+        /**
+         * Индекс возвращаемого элемента.
+         */
+        private int index = 0;
+
+        /**
+         * Метод возвращающий true если есть следующий элемент в массиве.
+         * false если достигнут конец или такого эл-та нет.
+         * @return true, false.
+         */
+        @Override
+        public boolean hasNext() {
+            int indexHasNext = index;
+            while (indexHasNext < arrayForHashMap.length) {
+                if (arrayForHashMap[indexHasNext] != null) {
+                    return true;
+                } else {
+                    indexHasNext++;
+                }
+            }
+            return false;
+        }
+
+        /**
+         * Метод возвращающий значение текущего элемента.
+         * @return значение.
+         */
+        @Override
+        public K next() {
+            while (index < arrayForHashMap.length) {
+                if (arrayForHashMap[index] != null) {
+                    return (K) arrayForHashMap[index++].getValue();
+                } else {
+                    index++;
+                }
+            }
+            throw new NoSuchElementException();
+        }
+    }
 }
+
+
+
+
