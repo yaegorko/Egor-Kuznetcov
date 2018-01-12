@@ -117,13 +117,15 @@ public class MyHashMapTest {
         }
         Keys masha = new Keys("Masha", "Ivanova");
         Keys dasha = new Keys("Dasha", "Sidorova");
-        myHashMap.insert(masha, 25);
-        myHashMap.insert(dasha, 26);
+        Keys masha1 = new Keys("Masha", "Ivanova");
+        assertThat(myHashMap.insert(masha, 25), is(true));
+        assertThat(myHashMap.insert(dasha, 26), is(true));
+        assertThat(myHashMap.insert(masha1, 27), is(false));
         assertThat(myHashMap.get(masha), is(25));
+        assertThat(myHashMap.get(masha1), is(25));
         assertThat(myHashMap.get(dasha), is(26));
         assertThat(myHashMap.delete(masha), is(true));
         assertThat(myHashMap.delete(masha), is(false));
-
     }
 
 }
