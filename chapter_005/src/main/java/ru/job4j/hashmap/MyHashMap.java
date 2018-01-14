@@ -133,12 +133,15 @@ public class MyHashMap<K, V> implements Iterable<K> {
      * @return значение если такой ключ есть в хранилище, RuntimeException если ключа нет.
      */
     public V get(K key) {
-        int hash = calculateHash(key);
-        for (Entry entry: arrayForHashMap) {
-            if (entry != null && hash == entry.getHash() && (key == entry.getKey() || key.equals(entry.getKey()))) {
-                return  (V) entry.getValue();
-            }
+        if (!isHashContains(key)) {
+            throw new RuntimeException();
         }
+        int position = calculatePosition(key, arrayForHashMap);
+
+        if (calculateHash(key) == arrayForHashMap[position].getHash() && (key == arrayForHashMap[position].getKey() || key.equals( arrayForHashMap[position].getKey()))) {
+                return  (V)  arrayForHashMap[position].getValue();
+            }
+
         throw new RuntimeException();
     }
 
