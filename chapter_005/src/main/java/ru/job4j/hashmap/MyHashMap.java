@@ -137,11 +137,10 @@ public class MyHashMap<K, V> implements Iterable<K> {
             throw new RuntimeException();
         }
         int position = calculatePosition(key, arrayForHashMap);
-
-        if (calculateHash(key) == arrayForHashMap[position].getHash() && (key == arrayForHashMap[position].getKey() || key.equals( arrayForHashMap[position].getKey()))) {
-                return  (V)  arrayForHashMap[position].getValue();
-            }
-
+        if (calculateHash(key) == arrayForHashMap[position].getHash()
+                && (key == arrayForHashMap[position].getKey() || key.equals(arrayForHashMap[position].getKey()))) {
+            return  (V)  arrayForHashMap[position].getValue();
+        }
         throw new RuntimeException();
     }
 
@@ -151,13 +150,15 @@ public class MyHashMap<K, V> implements Iterable<K> {
      * @return true если элемент удален, false если элемента с таким ключом нет.
      */
     public boolean delete(K key) {
-        int hash = calculateHash(key);
-        for (Entry entry : arrayForHashMap) {
-            if (entry != null && hash == entry.getHash() && (key == entry.getKey() || key.equals(entry.getKey()))) {
-                arrayForHashMap[calculatePosition(key, arrayForHashMap)] = null;
-                addedElementsCounter--;
-                return true;
-            }
+        if (!isHashContains(key)) {
+           return false;
+        }
+        int position = calculatePosition(key, arrayForHashMap);
+        if (calculateHash(key) == arrayForHashMap[position].getHash()
+                && (key == arrayForHashMap[position].getKey() || key.equals(arrayForHashMap[position].getKey()))) {
+            arrayForHashMap[calculatePosition(key, arrayForHashMap)] = null;
+            addedElementsCounter--;
+            return true;
         }
         return false;
     }
