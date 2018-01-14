@@ -76,11 +76,11 @@ public class MyHashMap<K, V> implements Iterable<K> {
      * @return true если есть такой же хэш.
      */
     private boolean isHashContains(K key) {
-        for (Entry entry: arrayForHashMap) {
-            if (entry != null && calculateHash(key) == entry.getHash()) {
+       int position = calculatePosition(key, arrayForHashMap);
+            if (arrayForHashMap[position] != null && calculateHash(key) == arrayForHashMap[position].getHash()) {
                 return true;
             }
-        }
+
         return false;
     }
 
