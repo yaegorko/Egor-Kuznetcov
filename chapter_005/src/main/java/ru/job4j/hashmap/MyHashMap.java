@@ -77,11 +77,7 @@ public class MyHashMap<K, V> implements Iterable<K> {
      */
     private boolean isHashContains(K key) {
        int position = calculatePosition(key, arrayForHashMap);
-            if (arrayForHashMap[position] != null && calculateHash(key) == arrayForHashMap[position].getHash()) {
-                return true;
-            }
-
-        return false;
+       return arrayForHashMap[position] != null && calculateHash(key) == arrayForHashMap[position].getHash();
     }
 
     /**
@@ -133,15 +129,14 @@ public class MyHashMap<K, V> implements Iterable<K> {
      * @return значение если такой ключ есть в хранилище, RuntimeException если ключа нет.
      */
     public V get(K key) {
-        if (!isHashContains(key)) {
-            throw new RuntimeException();
-        }
         int position = calculatePosition(key, arrayForHashMap);
-        if (calculateHash(key) == arrayForHashMap[position].getHash()
+        if (arrayForHashMap[position] != null && calculateHash(key) == arrayForHashMap[position].getHash()
                 && (key == arrayForHashMap[position].getKey() || key.equals(arrayForHashMap[position].getKey()))) {
             return  (V)  arrayForHashMap[position].getValue();
+        } else {
+            throw new RuntimeException();
         }
-        throw new RuntimeException();
+
     }
 
     /**
@@ -150,17 +145,15 @@ public class MyHashMap<K, V> implements Iterable<K> {
      * @return true если элемент удален, false если элемента с таким ключом нет.
      */
     public boolean delete(K key) {
-        if (!isHashContains(key)) {
-           return false;
-        }
         int position = calculatePosition(key, arrayForHashMap);
-        if (calculateHash(key) == arrayForHashMap[position].getHash()
+        if (arrayForHashMap[position] != null && calculateHash(key) == arrayForHashMap[position].getHash()
                 && (key == arrayForHashMap[position].getKey() || key.equals(arrayForHashMap[position].getKey()))) {
             arrayForHashMap[calculatePosition(key, arrayForHashMap)] = null;
             addedElementsCounter--;
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
@@ -181,7 +174,7 @@ public class MyHashMap<K, V> implements Iterable<K> {
          * Индекс возвращаемого элемента.
          */
         private int index = 0;
-       // private int indexHasNext = 0;
+
         /**
          * Метод возвращающий true если есть следующий элемент в массиве.
          * false если достигнут конец или такого эл-та нет.
