@@ -181,7 +181,7 @@ public class MyHashMap<K, V> implements Iterable<K> {
          * Индекс возвращаемого элемента.
          */
         private int index = 0;
-
+       // private int indexHasNext = 0;
         /**
          * Метод возвращающий true если есть следующий элемент в массиве.
          * false если достигнут конец или такого эл-та нет.
@@ -192,6 +192,7 @@ public class MyHashMap<K, V> implements Iterable<K> {
             int indexHasNext = index;
             while (indexHasNext < arrayForHashMap.length) {
                 if (arrayForHashMap[indexHasNext] != null) {
+                    index = indexHasNext;
                     return true;
                 } else {
                     indexHasNext++;
@@ -206,13 +207,11 @@ public class MyHashMap<K, V> implements Iterable<K> {
          */
         @Override
         public K next() {
-            while (index < arrayForHashMap.length) {
-                if (arrayForHashMap[index] != null) {
-                    return (K) arrayForHashMap[index++].getValue();
-                } else {
-                    index++;
-                }
-            }
+              if (hasNext()) {
+                  return (K) arrayForHashMap[index++].getValue();
+              } else {
+                  index++;
+              }
             throw new NoSuchElementException();
         }
     }
