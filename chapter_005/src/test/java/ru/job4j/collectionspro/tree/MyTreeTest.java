@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-public class MyTreeTest<E> {
+public class MyTreeTest<E extends Comparable<E>> {
 
     @Test
     public void when6ElFindLastThen6() {
@@ -23,7 +23,7 @@ public class MyTreeTest<E> {
 
     @Test
     public void when6ElFindNotExitThenOptionEmpty() {
-        MyTree<E> tree = new MyTree<>(new Node(1));
+        MyTree<E> tree = new MyTree<E>(new Node(1));
         tree.add(1, 2);
         assertThat(
                 tree.findBy(7).isPresent(),

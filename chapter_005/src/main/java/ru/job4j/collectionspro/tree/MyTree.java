@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Queue;
 
-public class MyTree<E> implements SimpleTree {
+public class MyTree<E extends Comparable<E>> implements SimpleTree {
 
     private Node root;
 
@@ -15,7 +15,7 @@ public class MyTree<E> implements SimpleTree {
 
     @Override
     public boolean add(Comparable parent, Comparable child) {
-      //  this.root.
+       Optional<Node<E>> e = findBy(parent);
 
         return false;
     }
@@ -40,6 +40,20 @@ public class MyTree<E> implements SimpleTree {
 
     @Override
     public Iterator iterator() {
-        return null;
+        return new MyTreeIterator();
+
+    }
+
+    private class MyTreeIterator implements Iterator{
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public Object next() {
+            return null;
+        }
     }
 }
