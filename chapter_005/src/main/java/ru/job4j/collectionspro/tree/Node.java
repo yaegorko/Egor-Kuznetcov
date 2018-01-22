@@ -8,7 +8,7 @@ import java.util.List;
  * @version $Id$
  * @since 0.1
  */
-public class Node<E> {
+public class Node<E> implements Comparable {
     private final List<Node<E>> children = new ArrayList<>();
     private final E value;
 
@@ -26,5 +26,10 @@ public class Node<E> {
 
     public boolean eqValue(E that) {
         return this.value.equals(that);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }
