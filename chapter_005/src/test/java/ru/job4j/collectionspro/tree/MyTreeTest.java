@@ -22,7 +22,7 @@ public class MyTreeTest<E extends Comparable<E>> {
     }
 
     @Test
-    public void when6ElFindLastThenFalse() {
+    public void when15ElFindLastThenFalse() {
         MyTree<E> tree = new MyTree<>(new Node(1));
         tree.add(1, 2);
         tree.add(1, 3);

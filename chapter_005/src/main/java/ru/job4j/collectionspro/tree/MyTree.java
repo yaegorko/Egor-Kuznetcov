@@ -1,9 +1,6 @@
 package ru.job4j.collectionspro.tree;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Optional;
-import java.util.Queue;
+import java.util.*;
 
 public class MyTree<E extends Comparable<E>> implements SimpleTree {
 
@@ -44,22 +41,36 @@ public class MyTree<E extends Comparable<E>> implements SimpleTree {
     }
 
     @Override
-    public Iterator iterator() {
+    public Iterator<E> iterator() {
         return new MyTreeIterator();
 
     }
 
     private class MyTreeIterator implements Iterator {
 
+        Queue<Node<E>> data = new LinkedList<>();
+
+        public MyTreeIterator() {
+            data.offer(root);
+        }
+
         @Override
         public boolean hasNext() {
-
+            if (data.peek() != null) {
+                return true;
+            }
             return false;
         }
 
         @Override
-        public Object next() {
-            return null;
+        public Node<E> next() {
+            if (hasNext()) {
+                for (Node<E> child : data.peek().leaves()) {
+                    data.offer(child);
+                }
+                return data.poll();
+            }
+            throw new NoSuchElementException();
         }
     }
 }
