@@ -7,7 +7,7 @@ import java.util.Queue;
 
 public class MyTree<E extends Comparable<E>> implements SimpleTree {
 
-    private Node root;
+    private final Node root;
 
     public MyTree(Node root) {
         this.root = root;
@@ -15,8 +15,13 @@ public class MyTree<E extends Comparable<E>> implements SimpleTree {
 
     @Override
     public boolean add(Comparable parent, Comparable child) {
-       Optional<Node<E>> e = findBy(parent);
+        Optional<Node<E>> optionalNodeParent = findBy(parent);
+        Optional<Node<E>> optionalNodeChild = findBy(child);
 
+        if (optionalNodeParent.isPresent() && !optionalNodeChild.isPresent()) {
+            optionalNodeParent.get().add(new Node(child));
+            return true;
+        }
         return false;
     }
 
@@ -44,10 +49,11 @@ public class MyTree<E extends Comparable<E>> implements SimpleTree {
 
     }
 
-    private class MyTreeIterator implements Iterator{
+    private class MyTreeIterator implements Iterator {
 
         @Override
         public boolean hasNext() {
+
             return false;
         }
 
