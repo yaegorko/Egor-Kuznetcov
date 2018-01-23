@@ -15,9 +15,9 @@ public class MyTree<E extends Comparable<E>> implements SimpleTree {
 
     @Override
     public boolean add(Comparable parent, Comparable child) {
-       Optional<Node<E>> e = findBy(parent);
+       
 
-        return false;
+        return true;
     }
 
     @Override
