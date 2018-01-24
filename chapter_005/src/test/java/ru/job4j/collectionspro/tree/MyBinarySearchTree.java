@@ -27,7 +27,7 @@ public class MyBinarySearchTree<E extends Comparable> {
             this.right = right;
         }
 
-        Node (E data) {
+        Node(E data) {
             this.data = data;
         }
     }
