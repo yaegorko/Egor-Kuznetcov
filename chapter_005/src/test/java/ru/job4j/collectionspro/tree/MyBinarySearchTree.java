@@ -71,7 +71,7 @@ public class MyBinarySearchTree<E extends Comparable> {
         return new MyBinarySearchTreeIterator();
     }
 
-    private class MyBinarySearchTreeIterator implements Iterator{
+    private class MyBinarySearchTreeIterator implements Iterator {
         /**
          * Очередь.
          */
