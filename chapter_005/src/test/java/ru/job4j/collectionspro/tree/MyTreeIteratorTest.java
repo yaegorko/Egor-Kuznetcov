@@ -8,6 +8,10 @@ import java.util.NoSuchElementException;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Класс тестов итератора MyTree.
+ * @param <E> дженерик.
+ */
 public class MyTreeIteratorTest<E extends Comparable<E>> {
 
     MyTree<E> tree = new MyTree<>(new Node(1));
@@ -21,8 +25,11 @@ public class MyTreeIteratorTest<E extends Comparable<E>> {
         tree.add(2, 8);
     }
 
+    /**
+     * Тест который последовательно вызывает hasNext и next .
+     */
     @Test (expected = NoSuchElementException.class)
-    public void t1() {
+    public void shouldReturnElementsFromMyTreeSequentially() {
         Iterator it = tree.iterator();
         assertThat(it.hasNext(), is(true));
         Node test = (Node) it.next();

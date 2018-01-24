@@ -5,8 +5,14 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
+/**
+ * Тесты класса MyTree.
+ * @param <E> дженерик.
+ */
 public class MyTreeTest<E extends Comparable<E>> {
-
+    /**
+     * Тест add.
+     */
     @Test
     public void when6ElFindLastThen6() {
         MyTree<E> tree = new MyTree<>(new Node(1));
@@ -21,6 +27,9 @@ public class MyTreeTest<E extends Comparable<E>> {
         );
     }
 
+    /**
+     * Добавляем родителя который не является ничьим потомком.
+     */
     @Test
     public void when15ElFindLastThenFalse() {
         MyTree<E> tree = new MyTree<>(new Node(1));
@@ -40,6 +49,9 @@ public class MyTreeTest<E extends Comparable<E>> {
         );
     }
 
+    /**
+     * Пробуем добавить 2 одинаковых потомка разным родителям.
+     */
     @Test
     public void whenTryAddTow6ElThanFindLastIn5() {
         MyTree<E> tree = new MyTree<>(new Node(1));
@@ -59,6 +71,9 @@ public class MyTreeTest<E extends Comparable<E>> {
         );
     }
 
+    /**
+     * Ищем несуществующий элемент.
+     */
     @Test
     public void when6ElFindNotExitThenOptionEmpty() {
         MyTree<E> tree = new MyTree<E>(new Node(1));
@@ -67,5 +82,23 @@ public class MyTreeTest<E extends Comparable<E>> {
                 tree.findBy(7).isPresent(),
                 is(false)
         );
+    }
+
+    /**
+     * Тест на бинарность.
+     */
+    @Test
+    public void testIsBinary() {
+        MyTree<E> tree = new MyTree<>(new Node(1));
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(2, 4);
+        assertThat(tree.isBinary(), is(true));
+        tree.add(2, 5);
+        tree.add(3, 6);
+        tree.add(3, 7);
+        assertThat(tree.isBinary(), is(true));
+        tree.add(3, 8);
+        assertThat(tree.isBinary(), is(false));
     }
 }
