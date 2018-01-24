@@ -1,5 +1,10 @@
 package ru.job4j.collectionspro.tree;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
+import java.util.Queue;
+
 public class MyBinarySearchTree<E extends Comparable> {
 
     private class Node<E> {
@@ -60,5 +65,53 @@ public class MyBinarySearchTree<E extends Comparable> {
             throw new RuntimeException();
         }
         return addedNode;
+    }
+
+    public Iterator iterator() {
+        return new MyBinarySearchTreeIterator();
+    }
+
+    private class MyBinarySearchTreeIterator implements Iterator{
+        /**
+         * Очередь.
+         */
+        Queue<Node<E>> dataQueue = new LinkedList<>();
+
+        /**
+         * Конструктор, устанавливаем первый элемент в очереди - корень дерева.
+         */
+        public MyBinarySearchTreeIterator() {
+            dataQueue.offer(root);
+        }
+
+        /**
+         * Имеем ли следующий элемент в дереве.
+         * @return true если элемент есть.
+         */
+        @Override
+        public boolean hasNext() {
+            if (dataQueue.peek() != null) {
+                return true;
+            }
+            return false;
+        }
+
+        /**
+         * Получаем следующий элемент.
+         * @return следующая нода.
+         */
+        @Override
+        public Node<E> next() {
+            if (hasNext()) {
+                if (dataQueue.peek().getLeft() != null) {
+                    dataQueue.offer(dataQueue.peek().getLeft());
+                }
+                if (dataQueue.peek().getRight() != null) {
+                    dataQueue.offer(dataQueue.peek().getRight());
+                }
+                return dataQueue.poll();
+            }
+            throw new NoSuchElementException();
+        }
     }
 }
