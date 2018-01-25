@@ -14,7 +14,7 @@ import static org.junit.Assert.assertThat;
  */
 public class MyTreeIteratorTest<E extends Comparable<E>> {
 
-    MyTree<E> tree = new MyTree<>(new Node(1));
+    MyTree<Integer> tree = new MyTree<>(1);
     {
         tree.add(1, 2);
         tree.add(1, 3);
@@ -32,29 +32,22 @@ public class MyTreeIteratorTest<E extends Comparable<E>> {
     public void shouldReturnElementsFromMyTreeSequentially() {
         Iterator it = tree.iterator();
         assertThat(it.hasNext(), is(true));
-        Node test = (Node) it.next();
-        assertThat(test.eqValue(1), is(true));
-        test = (Node) it.next();
+        assertThat(it.next(), is(1));
         assertThat(it.hasNext(), is(true));
-        assertThat(test.eqValue(2), is(true));
-        test = (Node) it.next();
+        assertThat(it.next(), is(2));
         assertThat(it.hasNext(), is(true));
-        assertThat(test.eqValue(3), is(true));
-        test = (Node) it.next();
+        assertThat(it.next(), is(3));
         assertThat(it.hasNext(), is(true));
-        assertThat(test.eqValue(4), is(true));
-        test = (Node) it.next();
+        assertThat(it.next(), is(4));
         assertThat(it.hasNext(), is(true));
-        assertThat(test.eqValue(5), is(true));
-        test = (Node) it.next();
+        assertThat(it.next(), is(5));
         assertThat(it.hasNext(), is(true));
-        assertThat(test.eqValue(8), is(true));
-        test = (Node) it.next();
+        assertThat(it.next(), is(8));
         assertThat(it.hasNext(), is(true));
-        assertThat(test.eqValue(6), is(true));
-        test = (Node) it.next();
+        assertThat(it.next(), is(6));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(7));
         assertThat(it.hasNext(), is(false));
-        assertThat(test.eqValue(7), is(true));
         it.next();
     }
 }

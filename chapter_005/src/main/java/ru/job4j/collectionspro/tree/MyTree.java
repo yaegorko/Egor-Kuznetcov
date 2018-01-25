@@ -6,7 +6,7 @@ import java.util.*;
  * Класс реализующий базовую структуру дерево.
  * @param <E>
  */
-public class MyTree<E extends Comparable<E>> implements SimpleTree {
+public class MyTree<E extends Comparable<E>> implements SimpleTree<E> {
     /**
      * Корень, начало дерева.
      */
@@ -14,10 +14,10 @@ public class MyTree<E extends Comparable<E>> implements SimpleTree {
 
     /**
      * Конструктор.
-     * @param root корень.
+     * @param value значение корня.
      */
-    public MyTree(Node root) {
-        this.root = root;
+    public MyTree(E value) {
+        this.root = new Node(value);
     }
 
     /**
@@ -27,7 +27,7 @@ public class MyTree<E extends Comparable<E>> implements SimpleTree {
      * @return true если элемент добавлен.
      */
     @Override
-    public boolean add(Comparable parent, Comparable child) {
+    public boolean add(E parent, E child) {
         Optional<Node<E>> optionalNodeParent = findBy(parent);
         Optional<Node<E>> optionalNodeChild = findBy(child);
 
@@ -44,13 +44,13 @@ public class MyTree<E extends Comparable<E>> implements SimpleTree {
      * @return Ноду со значением, если такое есть в дереве.
      */
     @Override
-    public Optional<Node<E>> findBy(Comparable value) {
+    public Optional<Node<E>> findBy(E value) {
         Optional<Node<E>> rsl = Optional.empty();
         Queue<Node<E>> data = new LinkedList<>();
         data.offer(this.root);
         while (!data.isEmpty()) {
             Node<E> el = data.poll();
-            if (el.eqValue((E) value)) {
+            if (el.eqValue(value)) {
                 rsl = Optional.of(el);
                 break;
             }
@@ -68,12 +68,11 @@ public class MyTree<E extends Comparable<E>> implements SimpleTree {
     public boolean isBinary() {
         Iterator iterator = this.iterator();
         while (iterator.hasNext()) {
-            Node node = (Node) iterator.next();
-            if (node.leaves().size() > 2) {
+            Optional<Node<E>> node = findBy((E) iterator.next());
+            if (node.get().leaves().size() > 2) {
                 return false;
             }
         }
-
         return true;
     }
 
@@ -120,12 +119,12 @@ public class MyTree<E extends Comparable<E>> implements SimpleTree {
          * @return следующая нода.
          */
         @Override
-        public Node<E> next() {
+        public E next() {
             if (hasNext()) {
                 for (Node<E> child : data.peek().leaves()) {
                     data.offer(child);
                 }
-                return data.poll();
+                return data.poll().getValue();
             }
             throw new NoSuchElementException();
         }

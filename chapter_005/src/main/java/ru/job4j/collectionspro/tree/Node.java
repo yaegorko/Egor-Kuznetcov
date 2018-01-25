@@ -7,16 +7,20 @@ import java.util.List;
  * Класс Node - элемент дерева.
  * @param <E> дженерик.
  */
-public class Node<E extends Comparable> {
+public class Node<E extends Comparable<E>> {
     /**
      * Потомки - ветви элемента.
      */
     private final List<Node<E>> children = new ArrayList<>();
+
     /**
      * Значение элемента.
      */
     private final E value;
 
+    public E getValue() {
+        return value;
+    }
     /**
      * Конструктор. Не используем элементы без значений.
      * @param value
