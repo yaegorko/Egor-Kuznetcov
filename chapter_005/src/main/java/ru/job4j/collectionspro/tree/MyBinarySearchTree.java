@@ -38,40 +38,36 @@ public class MyBinarySearchTree<E extends Comparable> {
     }
 
     Node root;
+    Node parent;
 
     MyBinarySearchTree(E data) {
         this.root = new Node(data);
+        this.parent  = root;
     }
 
     public boolean add(E data) {
-        isLeftOrRight(data, root);
-        return true;
-    }
-
-    private Node isLeftOrRight(E data, Node<E> parent) {
-
-        Node addedNode;
         if (data.compareTo(parent.getData()) <= 0 && parent.getLeft() != null) {
-            addedNode = isLeftOrRight(data, parent.getLeft());
+            parent = parent.getLeft();
+            add(data);
         } else if (data.compareTo(parent.getData()) > 0 && parent.getRight() != null) {
-            addedNode = isLeftOrRight(data, parent.getRight());
+            parent = parent.getRight();
+            add(data);
         } else if (data.compareTo(parent.getData()) <= 0 && parent.getLeft() == null) {
-            addedNode = new Node(data);
-            parent.setLeft(addedNode);
+            parent.setLeft(new Node(data));
         } else if (data.compareTo(parent.getData()) > 0 && parent.getRight() == null) {
-            addedNode = new Node(data);
-            parent.setRight(addedNode);
+            parent.setRight(new Node(data));
         } else {
-            throw new RuntimeException();
+            return false;
         }
-        return addedNode;
+        parent = root;
+        return true;
     }
 
     public Iterator iterator() {
         return new MyBinarySearchTreeIterator();
     }
 
-    private class MyBinarySearchTreeIterator implements Iterator {
+    private class MyBinarySearchTreeIterator implements Iterator<E> {
         /**
          * Очередь.
          */
@@ -101,7 +97,7 @@ public class MyBinarySearchTree<E extends Comparable> {
          * @return следующая нода.
          */
         @Override
-        public Node<E> next() {
+        public E next() {
             if (hasNext()) {
                 if (dataQueue.peek().getLeft() != null) {
                     dataQueue.offer(dataQueue.peek().getLeft());
@@ -109,7 +105,7 @@ public class MyBinarySearchTree<E extends Comparable> {
                 if (dataQueue.peek().getRight() != null) {
                     dataQueue.offer(dataQueue.peek().getRight());
                 }
-                return dataQueue.poll();
+                return dataQueue.poll().getData();
             }
             throw new NoSuchElementException();
         }
