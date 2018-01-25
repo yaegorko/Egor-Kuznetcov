@@ -7,8 +7,13 @@ import java.util.Iterator;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Класс тестов.
+ */
 public class MyBinarySearchTreeTest {
-
+    /**
+     * Тестирунм add and iterator.
+     */
     @Test
     public void testAddToMyBST() {
         MyBinarySearchTree binarySearchTree = new MyBinarySearchTree(10);
@@ -27,5 +32,21 @@ public class MyBinarySearchTreeTest {
         assertThat(iterator.next(), is(12));
     }
 
-
+    /**
+     * hasNext не сдвигает каретку.
+     */
+    @Test
+    public void testAddToMyBST2() {
+        MyBinarySearchTree binarySearchTree = new MyBinarySearchTree(10);
+        binarySearchTree.add(3);
+        binarySearchTree.add(11);
+        binarySearchTree.add(7);
+        Iterator iterator = binarySearchTree.iterator();
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is(10));
+        assertThat(iterator.hasNext(), is(true));
+        assertThat(iterator.next(), is(3));
+    }
 }
