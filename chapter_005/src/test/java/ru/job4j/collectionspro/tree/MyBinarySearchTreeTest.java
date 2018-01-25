@@ -3,6 +3,7 @@ package ru.job4j.collectionspro.tree;
 import org.junit.Test;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -14,7 +15,7 @@ public class MyBinarySearchTreeTest {
     /**
      * Тестирунм add and iterator.
      */
-    @Test
+    @Test (expected = NoSuchElementException.class)
     public void testAddToMyBST() {
         MyBinarySearchTree binarySearchTree = new MyBinarySearchTree(10);
         binarySearchTree.add(3);
@@ -30,6 +31,8 @@ public class MyBinarySearchTreeTest {
         assertThat(iterator.next(), is(7));
         assertThat(iterator.next(), is(15));
         assertThat(iterator.next(), is(12));
+        assertThat(iterator.hasNext(), is(false));
+        iterator.next();
     }
 
     /**
