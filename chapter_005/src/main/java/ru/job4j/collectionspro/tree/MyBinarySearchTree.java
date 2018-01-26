@@ -9,7 +9,7 @@ import java.util.Queue;
  * Класс бинарное дерево.
  * @param <E> дженерик.
  */
-public class MyBinarySearchTree<E extends Comparable> {
+public class MyBinarySearchTree<E extends Comparable<E>> implements Iterable<E>  {
     /**
      * Класс Нода - ячейка бинарного дерева.
      * @param <E>
@@ -80,11 +80,11 @@ public class MyBinarySearchTree<E extends Comparable> {
     /**
      * Корень - константа.
      */
-    private final Node root;
+    private final Node<E> root;
     /**
      * Текущая родительская нода.
      */
-    private Node parent;
+    private Node<E> parent;
 
     /**
      * Конструктор, задаем значение кореня.
@@ -122,6 +122,7 @@ public class MyBinarySearchTree<E extends Comparable> {
      * Итератор дерева.
      * @return итератор
      */
+    @Override
     public Iterator iterator() {
         return new MyBinarySearchTreeIterator();
     }
